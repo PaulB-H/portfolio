@@ -1,0 +1,63 @@
+* {
+    margin: 0;
+    padding: 0;
+}
+
+.parallax-container{
+    height: 600px;
+}
+
+#brandLogo {
+    margin-left: 10px;
+}
+#brandLogoSmall {
+    margin-left: 10px;
+}
+
+nav ul a {
+    color: black;
+}
+
+#aboutContain {
+    max-width: 75%;
+}
+
+#bioText {
+    display: block;
+}
+
+#portPic {
+    max-width: 150px;
+    float: left;
+    margin-right: 10px;
+    display: block;
+}
+
+h2 {
+    font-size: 42px;
+    margin-top: 0px;
+}
+
+#carouselContainer {
+    height: 380px;
+    overflow: show;
+    margin-bottom: 10px;
+    top: -100px;
+}
+
+#carouselOuter {
+    height: 400px;
+}
+
+#emailRow {
+    height: 75px;
+}
+
+button {
+    padding-bottom: 10px;
+}
+
+.navSpacer {
+    min-height: 43.5px;
+    max-height: 43.5px;
+}

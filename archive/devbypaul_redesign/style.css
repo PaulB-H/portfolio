@@ -1,0 +1,141 @@
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+html {
+  scrollbar-width: thin;
+  /* scrollbar-color: thumb track */
+  scrollbar-color: #4e6884 #e5edff;
+  overflow-x: hidden;
+}
+body {
+  background-color: #e5edff;
+  overflow-x: hidden;
+}
+html::-webkit-scrollbar {
+  width: 5px;
+  height: 8px;
+  background-color: #e5edff;
+}
+html::-webkit-scrollbar-thumb {
+  background: #4e6884;
+}
+
+h1,
+h2,
+h3,
+h4,
+h5 {
+  font-family: "EB Garamond", serif;
+  font-weight: normal;
+}
+
+p,
+a {
+  font-family: "Nanum Gothic", sans-serif;
+  font-size: 1.1em;
+}
+
+.wrap600 {
+  max-width: 600px;
+  margin: auto;
+}
+
+#home {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  height: 100vh;
+}
+#profile-img {
+  clip-path: circle(50% at 50% 50%);
+  -webkit-clip-path: circle(50% at 50% 50%);
+  margin: 10px;
+}
+#header-text {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-direction: column;
+  text-align: center;
+}
+
+#portfolio {
+  position: relative;
+}
+
+.project-container {
+  padding: 20px;
+  margin: auto;
+  margin-bottom: 15px;
+  background-color: #f9f9f9;
+}
+@media screen and (max-width: 600px) {
+  .project-container {
+    padding: 10px;
+  }
+}
+.project-header {
+  font-size: 2em;
+  text-align: left;
+}
+.project-desc {
+  margin: 10px 0;
+  line-height: 1.5em;
+}
+.fl-project-img {
+  float: left;
+  max-width: 50%;
+  padding: 10px;
+}
+.fr-project-img {
+  float: right;
+  max-width: 50%;
+  padding: 10px;
+}
+@media screen and (max-width: 500px) {
+  .fl-project-img,
+  .fr-project-img {
+    max-width: 100%;
+    width: 100%;
+  }
+}
+.project-links {
+  margin: 10px;
+  display: flex;
+  flex-direction: column;
+}
+.project-links a:first-child {
+  margin-top: 10px;
+}
+.project-links a {
+  white-space: nowrap;
+  width: max-content;
+  margin-bottom: 10px;
+}
+
+footer {
+  background-color: #f9f9f9;
+  display: flex;
+  flex-direction: row;
+  justify-content: center;
+  align-items: center;
+  flex-wrap: wrap;
+  min-height: 10vh;
+  padding: 10px 0;
+}
+footer a {
+  margin: 10px 25px;
+  white-space: nowrap;
+  text-decoration: none;
+  color: black;
+}
+footer i {
+  vertical-align: middle;
+  font-size: 1.5em;
+}
+footer span {
+  border-bottom: 1px solid black;
+}

@@ -1,0 +1,105 @@
+* {
+    margin: 0;
+    padding: 0;
+}
+body {
+    font-family: 'Montserrat', sans-serif;
+    max-width: 600px;
+    margin: auto;
+    background-image: url("./images/email-pattern.png");
+}
+h1 {
+    margin-bottom: 5px;
+}
+h3 {
+    border-bottom: 1px solid black;
+}
+#head {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+#headName {
+    border-bottom: 2px solid black;
+    margin-bottom: 0px;
+}
+#content {
+    margin: 10px;
+}
+/************* 
+NAV MENU 
+*************/
+.navLinks {
+    display: flex;
+    flex-direction: row;
+    margin-bottom: 5px;
+}
+ul {
+    list-style: none;
+}
+ul, li {
+    margin: 1px;
+    padding: 10px;
+}
+a:link, a:visited, a:hover, a:active {
+    color: black;
+    text-decoration: none;
+}
+li:hover {
+    background-color: #E6E6E6;
+    border-radius: 10px;
+}
+.active {
+    background-color: #E6E6E6;
+    border-radius: 10px;
+}
+/************* 
+PORTFOLIO 
+*************/
+td:hover {
+    background-color: #e6e6e6;
+    border-radius: 10px;
+    cursor: pointer;
+}
+td {
+    /* border-bottom: 1px solid #ddd; */
+}
+li {
+    list-style: none;
+}
+/************* 
+Contact 
+*************/
+.sectionImage {
+    float: left; 
+    margin: 5px; 
+    max-width: 150px; 
+    border-radius: 10px;
+}
+.sectionIcon {
+    float: left; 
+    margin: 5px; 
+    margin-right: 10px; 
+    width: 110px;
+    /* position: relative; 
+    top: -20px; */
+}
+/************* 
+Footer
+*************/
+.footer {
+    position: fixed;
+    left: 0;
+    bottom: 0;
+    width: 100%;
+    background-color: rgb(236, 236, 236);
+    color: darkgray;
+    text-align: center;
+    margin-top: 5px;
+}
+/************* 
+Fix for footer covering longer content
+*************/
+.projectDisplay, #about {
+    margin-bottom: 25px;
+}

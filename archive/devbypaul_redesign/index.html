@@ -1,0 +1,561 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Portfolio - Paul Bernard-Hall - Dev by Paul</title>
+    <!-- Google Fonts -->
+    <link rel="preconnect" href="https://fonts.gstatic.com" />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Jura&amp;family=Nanum+Gothic&amp;family=EB+Garamond&amp;display=swap"
+      rel="stylesheet"
+    />
+    <!-- Remix Icon -->
+    <link
+      href="https://cdn.jsdelivr.net/npm/remixicon@2.5.0/fonts/remixicon.css"
+      rel="stylesheet"
+    />
+    <!-- Animate on Scroll CSS -->
+    <link href="https://unpkg.com/aos@2.3.1/dist/aos.css" rel="stylesheet" />
+    <!-- Local CSS -->
+    <link rel="stylesheet" href="./style.css" />
+  </head>
+  <body>
+    <!-- Home -->
+    <div id="home">
+      <h1 data-aos="fade-down">Paul Bernard-Hall</h1>
+      <img
+        id="profile-img"
+        src="./images/profile.png"
+        alt="Picture of me, Paul"
+      />
+
+      <div id="header-text" data-aos="fade-up">
+        <p style="font-size: 1.5em">Full-Stack Web Developer</p>
+        <div>
+          <h3>MongoDB, Express, Node, React</h3>
+          <p>HTML, CSS, JavaScript</p>
+          <p>Ubuntu, Windows, MySQLi</p>
+          <p>Responsive Design</p>
+          <p>REST'ful API's</p>
+          <p>CLI's, Git</p>
+        </div>
+      </div>
+    </div>
+    <!-- End Home -->
+
+    <!-- Portfolio -->
+    <div id="portfolio">
+      <!-- Designs by Tabitha -->
+      <div
+        class="designsbytabitha project-container"
+        data-aos="fade-right"
+        data-aos-anchor-placement="center-bottom"
+      >
+        <div class="wrap600">
+          <h3 class="project-header">Designs by Tabitha</h3>
+
+          <div>
+            <p class="project-desc">
+              This was my first experience using PHP, which was a bit of a
+              detour for me because it was not something covered in the
+              bootcamp. I enjoyed using many of the great built in features such
+              as sessions and password_hash.
+            </p>
+            <img
+              class="fr-project-img"
+              src="./images/designs_by_tabitha.svg"
+              alt="#"
+            />
+          </div>
+          <p class="project-desc">
+            The logo on the homepage was made by taking a commissioned image and
+            running it through a vector converter turning it into an SVG. The
+            masks page connects to the user system, both of which use the SQL
+            DB. I used a lightweight popup library to help build the shopping
+            cart functionality.
+          </p>
+          <p class="project-desc">
+            User passwords are hashed and salted before entry into the DB, and I
+            used PHP-Session to build the login system. There is also an
+            administrator order-management section, providing the ability to
+            filter and search orders, update status, and even keep track of
+            items made per order.
+          </p>
+
+          <div class="project-links">
+            <a href="http://www.designsbytabitha.ca" target="_blank">
+              - Live Site
+            </a>
+            <a
+              href="https://github.com/PaulB-H/designsbytabitha"
+              target="_blank"
+            >
+              - Github Repo
+            </a>
+          </div>
+
+          <p><sub>HTML, CSS, JS, PHP, MySQLi</sub></p>
+          <p><sub>Bitnami WAMP, WinSCP, PHPMyAdmin, CPanel</sub></p>
+        </div>
+        <!-- END .wrap600 -->
+      </div>
+      <!-- END Designs by Tabitha -->
+
+      <!-- IBansal CPA -->
+      <!-- <div
+        class="ibansalcpa project-container"
+        data-aos="fade-left"
+        data-aos-anchor-placement="center-bottom"
+      >
+        <div class="wrap600">
+          <h2 class="project-header">IBansal CPA</h2>
+
+          <div>
+            <p class="project-desc">
+              A minimal page made for an accountant. Secured with SSL through
+              CertBot / LetsEncrypt, and hosted on a Ubuntu VPS with NGINX. I
+              also setup some basic server security such as restricting root
+              access over SSH, and implementing an auto-IP banning service to
+              stop brute force access attempts.
+            </p>
+            <img class="fl-project-img" src="./images/cpa_logo.jpg" alt="#" />
+          </div>
+
+          <p class="project-desc">
+            I wanted to lock this to scroll section by section. I applied spans
+            with the rule "white-space: nowrap" to make sure things like email
+            and phone number did not line-break in an awkward spot. I used a
+            library called Animate on Scroll to make the page feel more dynamic.
+          </p>
+
+          <div class="project-links">
+            <a href="https://www.ibansalcpa.com" target="_blank">
+              - Live Site
+            </a>
+            <a href="https://github.com/PaulB-H/inderjit_cpa" target="_blank">
+              - Github Repo
+            </a>
+          </div>
+
+          <p>
+            <sub>
+              HTML, CSS, JavaScript,
+              <a href="https://michalsnik.github.io/aos/" target="_blank">
+                AOS
+              </a>
+            </sub>
+          </p>
+        </div> -->
+      <!-- END .wrap600 -->
+      <!-- </div> -->
+      <!-- END IBansal CPA -->
+
+      <!-- Workout Log -->
+      <div
+        class="workoutLog project-container"
+        data-aos="fade-right"
+        data-aos-anchor-placement="center-bottom"
+      >
+        <div class="wrap600">
+          <h2 class="project-header">Workout Log</h2>
+          <div>
+            <p class="project-desc">
+              I wanted to make a lightweight, easy to use, workout tracker that
+              had only the necessary features. Add exercises to a workout with a
+              title, and set number, then specify weight and reps. There is even
+              an option to add notes for each exercise.
+            </p>
+            <img
+              src="./images/workoutlog_thumbnail.PNG"
+              alt="#"
+              class="fr-project-img"
+            />
+          </div>
+          <p class="project-desc">
+            I used izitoast, my favorite modal / popup library to help make
+            inputting data easy and intuitive. This is a good candidate to be
+            re-build with MERN. Currently it is only using localstorage.
+          </p>
+
+          <div class="project-links">
+            <a href="https://paulb-h.github.io/workout-log/" target="_blank">
+              - Live Site
+            </a>
+            <a href="https://github.com/PaulB-H/workout-log" target="_blank">
+              - Github Repo
+            </a>
+          </div>
+
+          <p>
+            <sub>
+              HTML, CSS, JS,
+              <a href="https://izitoast.marcelodolza.com/" target="_blank">
+                izitoast.js
+              </a>
+            </sub>
+          </p>
+        </div>
+        <!-- END .wrap600 -->
+      </div>
+      <!-- END Workout Log -->
+
+      <!-- React Pokedex -->
+      <div
+        class="reactPokedex project-container"
+        data-aos="fade-left"
+        data-aos-anchor-placement="center-bottom"
+      >
+        <div class="wrap600">
+          <h2 class="project-header">React Pokedex</h2>
+
+          <div>
+            <p class="project-desc">
+              A small react project using functional components, hooks, and
+              fetch. State is currently component level, but I will be
+              implementing the context API when the app gets more complicated.
+            </p>
+            <img class="fl-project-img" src="./images/pika.PNG" alt="Pikachu" />
+          </div>
+          <p class="project-desc">
+            Right now you can get a random pokemon, or get one from first 150
+            "classic" ones. I plan on changing this to make calls for ALL
+            Pokemon on app load, and save the state with Context API. This will
+            make it easy to build a proper "Pokedex", with the ability to browse
+            list-style, or search by name, type, or number.
+          </p>
+
+          <div class="project-links">
+            <a href="https://paulb-h.github.io/reactpokedex/" target="_blank">
+              - Live Site
+            </a>
+
+            <a href="https://github.com/PaulB-H/reactpokedex" target="_blank">
+              - Github Repo
+            </a>
+          </div>
+
+          <p>
+            <sub
+              >HTML, CSS, JS, React,
+              <a href="https://pokeapi.co/" target="_blank"> pokeapi </a></sub
+            >
+          </p>
+        </div>
+        <!-- END .wrap600 -->
+      </div>
+      <!-- END React Pokedex -->
+
+      <!-- React Native -->
+      <!-- <div
+        class="reactNative project-container"
+        data-aos="fade-right"
+        data-aos-anchor-placement="center-bottom"
+      >
+        <div class="wrap600">
+          <h2 class="project-header">Shopping List</h2>
+
+          <p style="text-align: left"><sup>React Native</sup></p>
+
+          <div>
+            <p class="project-desc">
+              Part of a React-Native crash course, my first experience with
+              React-Native, Android Studio, and deploying an app to the play
+              store.
+            </p>
+            <img
+              class="fr-project-img"
+              src="./images/react_native.PNG"
+              alt="#"
+            />
+          </div>
+
+          <p class="project-desc">
+            Simple shopping list made using React Native, and deployed to Google
+            Play Store. Enter name, then add an item, delete items. Getting the
+            build version of the app, and going through the deployment on the
+            Google Play Store were the hardest parts of this project.
+          </p>
+
+          <p class="project-desc">
+            I found it easy to work with, being so close to React-Dom, once you
+            learn the React-Native components the styling is almost the same as
+            normal CSS. I loved being able to connect my phone, and see
+            hot-reload changes on my device as with a normal React dev server.
+          </p>
+
+          <div class="project-links">
+            <a
+              href="https://play.google.com/store/apps/details?id=com.paulsreactnativeshop"
+              target="_blank"
+            >
+              - App on Google Play Store
+            </a>
+            <a href="https://github.com/PaulB-H/ReactNative" target="_blank">
+              - Github Repo
+            </a>
+            <a
+              href="https://www.youtube.com/watch?v=Hf4MJH0jDb4"
+              target="_blank"
+            >
+              - Traversy Media - React Native
+            </a>
+          </div>
+
+          <p><sub>React-Native, Android Studio, JS</sub></p>
+        </div> -->
+      <!-- END .wrap600 -->
+      <!-- </div> -->
+      <!-- END React Native -->
+
+      <!-- Xcel Solutions -->
+      <!-- <div
+        class="xcelSolutions project-container"
+        data-aos="fade-left"
+        data-aos-anchor-placement="center-bottom"
+      >
+        <div class="wrap600">
+          <h2 class="project-header">Xcel Solutions</h2>
+          <div>
+            <p class="project-desc">
+              This was one of my earliest projects after graduating, and my
+              first time working with WordPress. There are many free plugins
+              which make things like blogs easy to setup.
+            </p>
+            <img
+              src="./images/xcelsolutions.png"
+              alt="#"
+              class="fl-project-img"
+              style="background-color: #ffffff"
+            />
+          </div>
+
+          <p class="project-desc">
+            There was already a theme and basic layout in place, and without
+            knowing better, I started trying to customize things in that theme,
+            instead of working from an empty one.
+          </p>
+
+          <p class="project-desc">
+            I had some issues optimizing this site, so it will take a second or
+            two to load. I tried using some plugins to defer unused styles and
+            scripts from the default theme, but I need to rebuild it from a
+            blank theme.
+          </p>
+
+          <div class="project-links">
+            <a href="http://www.xcelsolutions.ca" target="_blank">
+              - Live Site
+            </a>
+            <a style="border-bottom: 1px solid black">
+              <strike> - Github Repo </strike>
+            </a>
+          </div>
+
+          <p><sub>Wordpress, HTML, CSS, JS</sub></p>
+        </div> -->
+      <!-- END .wrap600 -->
+      <!-- </div> -->
+      <!-- END Xcel Solutions -->
+
+      <!-- Poke Sim -->
+      <div
+        class="pokeSim project-container"
+        data-aos="fade-right"
+        data-aos-anchor-placement="center-bottom"
+      >
+        <div class="wrap600">
+          <h2 class="project-header">Poke-Sim</h2>
+          <div>
+            <p class="project-desc">
+              A group project where I was in charge of building the layout /
+              interface. Able to call over 600 Pokemon Pokemon. Selection
+              carousel with stat-display, battle window, sprites, and numerous
+              animations. Combat calculation that includes Critical Chance,
+              Attack/Special Attack, and Defense.
+            </p>
+            <img src="./images/pokesim.PNG" alt="#" class="fr-project-img" />
+          </div>
+
+          <p class="project-desc">
+            This was my first large project with a third party API, and it was
+            amazing to see what a powerful, and interactive app you could build
+            with them. It was also good experience working as a team in GitHub,
+            we got some experience with branches and merging, and did some
+            pair-coding with VS Code Live Share.
+          </p>
+
+          <div class="project-links">
+            <a href="https://paulb-h.github.io/pokeSim/" target="_blank">
+              - Live Site
+            </a>
+            <a href="https://github.com/PaulB-H/pokeSim" target="_blank">
+              - Github Repo
+            </a>
+          </div>
+
+          <p>
+            <sub>
+              HTML, CSS, JS,
+              <a href="https://pokeapi.co/" target="_blank">PokeAPI</a>
+            </sub>
+          </p>
+        </div>
+        <!-- END .wrap600 -->
+      </div>
+      <!-- END Poke Sim -->
+
+      <!-- Calculator -->
+      <!-- <div
+        class="calculator project-container"
+        data-aos="fade-left"
+        data-aos-anchor-placement="center-bottom"
+      >
+        <div class="wrap600">
+          <h2 class="project-header">Calculator</h2>
+          <div>
+            <p class="project-desc">
+              One of the first JavaScript projects we made when I started
+              learning coding was building a calculator, I wanted to repeat this
+              from scratch with what I have learned since.
+            </p>
+            <img src="./images/calc.PNG" alt="#" class="fl-project-img" />
+          </div>
+
+          <p class="project-desc">
+            I had tried a few times before, but after having spent so much time
+            on code challenges and working with vanilla JS and the DOM, I was a
+            lot more confident this attempt. I tried to limit possible errors by
+            preventing things like trailing operators, and prefixed 0's which
+            caused the eval() function to break.
+          </p>
+
+          <div class="project-links">
+            <a href="https://paulb-h.github.io/calculator/" target="_blank">
+              - Live Site
+            </a>
+            <a href="https://github.com/PaulB-H/calculator" target="_blank">
+              - Github Repo
+            </a>
+          </div>
+
+          <p><sub>HTML, CSS, JS</sub></p>
+        </div> -->
+      <!-- END .wrap600 -->
+      <!-- </div> -->
+      <!-- END Calculator -->
+
+      <!-- Data Structures -->
+      <!-- <div
+        class="codingChallanges project-container"
+        data-aos="fade-right"
+        data-aos-anchor-placement="center-bottom"
+      >
+        <div class="wrap600">
+          <h2 class="project-header">Data Structures</h2>
+          <p style="text-align: left; margin-bottom: -5px">
+            <sup>In JavaScript</sup>
+          </p>
+
+          <p class="project-desc">
+            A reference with highlighted code snippets. Following the tutorial
+            by Free Code Camp. I am about 50% through this, the latest structure
+            I covered is Binary Search Trees.
+          </p>
+
+          <div class="project-links">
+            <a
+              href="https://paulb-h.github.io/data_structures/"
+              target="_blank"
+            >
+              - Live Site
+            </a>
+            <a
+              href="https://github.com/PaulB-H/data_structures"
+              target="_blank"
+            >
+              - Github Repo
+            </a>
+            <a
+              href="https://www.youtube.com/watch?v=t2CEgPsws3U"
+              target="_blank"
+            >
+              - Free Code Camp Data Structures
+            </a>
+          </div>
+        </div> -->
+      <!-- END .wrap600 -->
+      <!-- </div> -->
+      <!-- END Data Structures -->
+
+      <!-- Coding Challenges -->
+      <div
+        class="codingChallanges project-container"
+        data-aos="fade-left"
+        data-aos-anchor-placement="center-bottom"
+      >
+        <div class="wrap600">
+          <h2 class="project-header">Code Challenges</h2>
+          <p style="text-align: left; margin-bottom: -5px">
+            <sup>HackerRank</sup>
+          </p>
+
+          <p class="project-desc">
+            A collection of JavaScript Code Challenges I have completed on
+            HackerRank. I am excited to learn more about Data Structures and
+            Algorithms / BigO Notation and apply it here.
+          </p>
+
+          <div class="project-links">
+            <a
+              href="https://paulb-h.github.io/programming-challenges/"
+              target="_blank"
+            >
+              - Live Site
+            </a>
+            <a
+              href="https://github.com/PaulB-H/programming-challenges"
+              target="_blank"
+            >
+              - Github Repo
+            </a>
+          </div>
+        </div>
+        <!-- END .wrap600 -->
+      </div>
+      <!-- END Coding Challenges -->
+    </div>
+    <!-- END Portfolio -->
+
+    <footer data-aos="fade-down" data-aos-anchor-placement=".codingChallanges">
+      <a
+        href="https://docs.google.com/document/d/1G9fwGe4JHyPrpLseTZ_8quOiGfeU2uF-qLVDv1Q4Xh8/preview"
+        target="_blank"
+      >
+        <i class="ri-file-text-line"></i>
+        <span>Resume</span>
+      </a>
+
+      <a href="https://github.com/PaulB-H" target="_blank">
+        <i class="ri-github-fill"></i>
+        <span>github.com/PaulB-H</span>
+      </a>
+
+      <a href="https://www.linkedin.com/in/paulb-h/" target="_blank">
+        <i class="ri-linkedin-box-fill"></i>
+        <span>linkedin.com/in/PaulB-H/</span>
+      </a>
+
+      <a href="mailto:devbypaul@gmail.com" target="_blank">
+        <i class="ri-mail-line"></i>
+        <span>devbypaul@gmail.com</span>
+      </a>
+    </footer>
+
+    <!-- Animate on Scroll JS -->
+    <script src="https://unpkg.com/aos@2.3.1/dist/aos.js"></script>
+    <!-- Local JS -->
+    <script src="./script.js"></script>
+  </body>
+</html>

@@ -1,0 +1,59 @@
+/* 
+moved notes and commits to notesNcommits.md
+*/
+
+
+/* Reset CSS */
+* {
+    margin: 0;
+    padding: 0;
+}
+
+/* html {
+    min-height: calc(var(--vh, 1vh) * 100);
+} */
+
+body, wrapper {
+    /* min-height: 100vh; See issue #1 fixed in commit 8*/
+    min-height: calc(var(--vh, 1vh) * 100);
+    background-image: url(../images/gaming-pattern.png);
+}
+
+footer {
+    text-align: center;
+    font-size: 75%;
+}
+
+.portPic {
+    max-width: 150px;
+    float: left;
+    margin: 10px;
+}
+
+/* set content width for main content */
+
+main {
+    max-width: 960px;
+}
+
+/* centered navbar links using flexbox and didnt want to center brand anyways - This was a big issue to solve without limiting navbar width / messing up item alignment in regard to NavBar Brand
+.NavWrap{
+     max-width: 960px;
+ } 
+ */
+
+.contactBox-dark {
+    border-radius: 5px;
+    align-items: center;
+    padding: 10px;
+}
+
+.portWrap {
+    max-width: 960px;
+}
+
+/* Did not use figures for images on portfolio page, interesting bootstrap element though. Want to  have thumbnails with fade in link overlay with javascript
+.figure {
+    margin: 10px;
+    align-self: center;
+} */

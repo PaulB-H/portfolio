@@ -1,0 +1,147 @@
+/* 0080FF - Nice blue */
+
+* {
+    margin: 0;
+    padding: 0;
+}
+
+#my-nav {
+    justify-content: space-between;
+    border-bottom: 1px solid #76B6FB;
+}
+
+#my-nav .navbar-brand {
+    margin-right: 5px;
+}
+
+.navbar-toggler {
+    color: black;
+}
+
+.anchor {
+    padding-top: 65px;
+    margin-top: -65px;
+}
+
+#jumbo {
+    margin-bottom: 10px;
+    padding-bottom: 10px;
+}
+
+#projects-header span {
+    color: black;
+    /* background-color: #F8F9FA; */
+    background-color: white;
+    font-size: 2rem;
+    font-weight: 300;
+    line-height: 1.2;
+}
+
+#projects {
+    margin-left: 0;
+    margin-right: 0;
+    justify-content: center;
+}
+
+#project-card {
+    max-width: 300px;
+    margin-bottom: 25px;
+    /* max-height: 400px; */
+}
+
+.card-img-top {
+    max-height: 200px;
+}
+
+.card-body .card-text {
+    padding-bottom: 15px;
+}
+
+.page-links {
+    display: flex;
+    justify-content: center;
+    align-items: baseline;
+    position: absolute;
+    left: 50%;
+    margin-left: -92px;
+    bottom: 20px;
+}
+
+.page-links p:first-child {
+    margin-right: 5px;
+}
+
+.page-links p:last-child {
+    margin-left: 5px;
+}
+
+.text-muted {
+    position: absolute;
+    bottom: 10px;
+}
+
+#about-me {
+    margin: 10px 0 0 0;
+    padding-bottom: 10px;
+    padding: 37px;
+}
+
+#about-me img {
+    float: right;
+    margin-top: -80px;
+    padding: 25px;
+    max-height: 200px;
+    border-radius: 50px;
+}
+
+#social-links {
+    display: flex;
+    justify-content: center;
+}
+
+#social-links h4 {
+    padding: 0 25px;
+}
+
+#social-links h4 i {
+    padding-right: 5px;
+}
+
+@media only screen and (max-width: 576px) {
+    #project-card {
+        margin: auto;
+        margin-bottom: 25px;
+    }
+    #jumbo {
+        margin-top: 30px;
+    }
+    #jumbo h1 {
+        font-size: 40px;
+    }
+    #my-nav .navbar-nav {
+        /* justify-content: flex-start; */
+        flex-direction: row;
+    }
+    #my-nav .navbar-nav .nav-item {
+        padding-right: .5rem;
+        padding-left: .5rem;
+    }
+    #about-me img {
+        /* float: none; */
+        margin-top: -10px;
+        padding: 0 0 10px 0;
+    }
+    #about-me {
+        margin: 0;
+        padding: 0px;
+    } 
+    #social-links {
+        display: flex;
+        justify-content: center;
+        padding: 0 10px 0 0;
+        text-align: center;
+    }
+    #social-links h4 {
+        padding: 0 10px 0 0;
+    }
+}

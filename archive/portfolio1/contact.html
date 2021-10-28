@@ -1,0 +1,62 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta http-equiv="X-UA-Compatible" content="ie=edge">
+  <title>Document</title>
+  <link rel="stylesheet" type="text/css" href="assets/css/style.css">
+  <link href="https://fonts.googleapis.com/css?family=Montserrat&display=swap" rel="stylesheet">
+</head>
+
+<body>
+  <header class="header">
+    <div class="headerFlex">
+      <h1 class="myName">
+        Paul Bernard-Hall
+      </h1>
+      <ul class="NavBar">
+        <li class="navList"><a href="index.html"> About Me </a></li>
+        <li class="navList"><a href="portfolio.html"> Portfolio </a></li>
+        <li class="navList"><a href="contact.html"> Contact </a></li>
+      </ul>
+    </div>
+  </header>
+  <div class="contactBox">
+    <h1>Contact Me</h1>
+    <p>(This form won't work until I learn some JavaScript!)</p>
+    <hr />
+    <br>
+    <div class="emailForm">
+      <form action="action_page.php">
+
+        <label for="fname">First Name</label>
+        <input type="text" id="fname" name="firstname" placeholder="Your name..">
+
+        <label for="lname">Last Name</label>
+        <input type="text" id="lname" name="lastname" placeholder="Your last name..">
+
+        <label for="country">Country</label>
+        <select id="country" name="country">
+          <option value="australia">Australia</option>
+          <option value="canada">Canada</option>
+          <option value="usa">USA</option>
+        </select>
+
+        <label for="subject">Subject</label>
+        <textarea id="subject" name="subject" placeholder="Write something.." style="height:200px"></textarea>
+
+        <input type="submit" value="Submit">
+
+      </form>
+    </div>
+  </div>
+
+  <footer class="footer">
+    Copyright &copy;
+  </footer>
+
+</body>
+
+</html>

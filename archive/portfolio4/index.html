@@ -1,0 +1,190 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <!-- jQuery -->
+    <script src="https://code.jquery.com/jquery-3.4.1.min.js" integrity="sha256-CSXorXvZcTkaix6Yvo6HppcZGetbYMGWSFlBw8HfCJo=" crossorigin="anonymous"></script>
+    <!-- Toastr CSS -->
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/toastr.js/latest/css/toastr.min.css" rel="stylesheet"/>
+    <!-- Toastr JS -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/toastr.js/latest/js/toastr.min.js"></script>
+    <!-- Personal CSS -->
+    <link rel="stylesheet" href="style.css">
+    <!-- Montserrat Font Link -->
+    <link href="https://fonts.googleapis.com/css?family=Montserrat&display=swap" rel="stylesheet">
+    <!-- Favicon (Might swap for white icon w/black text) -->
+    <link rel="shortcut icon" href="./images/favicon.png" type="image/x-icon">
+    <title>Paul Bernard-Hall</title>
+</head>
+<body>
+    <div id="containAll">
+
+        <div id="head" style="display: none;">
+            <h1 id="headName"> Paul Bernard-Hall</h1>
+            <ul class="navLinks">
+                <!-- <li class="homeLink"><a href="#">Home</a></li> -->
+                <li class="aboutLink active"><a href="#">About</a></li>
+                <li class="portfolioLink"><a href="#">Portfolio</a></li>
+                <li class="contactLink"><a href="#">Contact</a></li>
+            </ul>
+        </div>
+
+        <div id="content" style="display: none;">  
+
+            <div id="about">
+
+                <img class="sectionImage" src="./images/portfolioPicture.jpg">
+                <h3>About Me</h3>
+                <p style="margin: 5px;">
+                    I am a web developer who likes making clean, easy to use experiences. Combining my enjoyment for building things with my passion for technology, programming is a natural field for me. <br><br> I have management experience in fast-paced deadline-focused environments. I am able to speak confidently, manage a team, while building future leaders. I value the bonds formed and results delivered from an organized, motivated group. I love minimal UI’s, with responsive animations, and strive towards minimalism and simplicity in other areas of life. <br><br> I am a natural athlete and enjoy sports from winter to summer. I have been an avid gamer for years, which has grown my appreciation for a clean, easy to navigate interface. My future is a job where I can continue to learn about and be immersed in technology every day.
+                </p>
+
+            </div>
+
+            <div id="portfolio" class="" style="display: none;">
+
+                <img class="sectionImage" src="https://via.placeholder.com/150" style="display: none;">
+                <h3>Project List</h3>
+                <p style="margin: 5px;">
+                    <table style="width:100%; text-align: center; justify-content: center;">
+                        <tr>
+                            <td class="project1link active"><li class="project1link active"><a href="#">Weather Dash</a></li></td>
+                            <td class="project2link"><li class="project2link"><a href="#">Day Planner</a></li></td>
+                            <td class="project3link"><li class="project3link"><a href="#">Routine Builder</a></li></td>
+                        </tr>
+                        <tr>
+                            <td><li class="project4link"><a href="#">PokeSim</a></li></td>
+                            <td><li class="project5link"><a href="#">FitHub</a></li></td>
+                            <td><li class="project6link"><a href="#">PlaceHolder</a></li></td>
+                        </tr>
+                    </table> 
+                </p>
+
+                <div id="project1" class="projectDisplay" style="margin-top: 10px;">
+                    <h1>Weather Dash</h1>
+                    <p>
+                        For this assignment we used the OpenWeather API to build a website that would allow users to enter a city, and get the current and 5 day forecast for that location.
+                        <br><br>
+                        This assignment helped familiarize me with flex-alignment
+                    </p>
+                    <br>
+                    <a href="https://paulb-h.github.io/weatherDash/" target="_blank"><strong>Click here to view the Github live page</strong></a>
+                    <br><br>
+                    <a href="https://github.com/PaulB-H/weatherDash" target="_blank"><strong>Click here to view repository on Github</strong></a>
+                </div>
+
+                <div id="project2" class="projectDisplay" style="margin-top: 10px; display: none;">
+                    <h1>Day Planner</h1>
+                    <p>
+                        This was an assignment to display a textbox for each hour of the workday in which you could save events.
+                    </p>
+                    <br>
+                    <a href="https://paulb-h.github.io/dayPlanner/" target="_blank"><strong>Click here to view the Github live page</strong></a>
+                    <br><br>
+                    <a href="https://github.com/PaulB-H/dayPlanner" target="_blank"><strong>Click here to view repository on Github</strong></a>
+                </div>
+
+                <div id="project3" class="projectDisplay" style="margin-top: 10px; display: none;">
+                    <h1>Routine Builder</h1>
+                    <p>
+                        This was a component for another project.
+                        <br><br>
+                        The goal was to call upon a fitness API for exercises, and allow the user to add each one to a routine.
+                        <br><br>
+                        Currently you are able to search for and view exercises by bodypart, but no routine building functionality is complete yet.
+                    </p>
+                    <br>
+                    <a href="https://paulb-h.github.io/routineBuilder/" target="_blank"><strong>Click here to view the Github live page</strong></a>
+                    <br><br>
+                    <a href="https://github.com/PaulB-H/routineBuilder" target="_blank"><strong>Click here to view repository on Github</strong></a>                    
+                </div>
+
+                <div id="project4" class="projectDisplay" style="margin-top: 10px; display: none;">
+                    <h1>PokeSim</h1>
+                    <p>
+                        This was our first group project.
+                        <br>
+                        We used an API called "PokeApi" to get images and stats for Pokemon, and created a random-battle system where you can fight a computer team.
+                    </p>
+                    <br>
+                    <a href="https://paulb-h.github.io/pokeSim/" target="_blank"><strong>Click here to view the Github live page</strong></a>
+                    <br><br>
+                    <a href="https://github.com/PaulB-H/pokeSim" target="_blank"><strong>Click here to view repository on Github</strong></a>                 
+                </div>
+
+                <div id="project5" class="projectDisplay" style="margin-top: 10px; display: none;">
+                    <h1>Project 5</h1>
+                    <p>
+                        No link yet!
+                    </p>
+                    <br>
+                    <a href="#"><strong>Click here to view the Github live page</strong></a>
+                    <br><br>
+                    <a href="#"><strong>Click here to view repository on Github</strong></a>                    
+                </div>       
+
+                <div id="project6" class="projectDisplay" style="margin-top: 10px; display: none;">
+                    <h1>Project 6</h1>
+                    <p>
+                        Placeholder!
+                        Lorem ipsum dolor, sit amet consectetur adipisicing elit. Explicabo itaque nulla possimus modi consequatur ea suscipit rerum, obcaecati aspernatur dignissimos qui reprehenderit tempore nostrum officiis voluptatem. Dolore ipsam nisi iure. Lorem ipsum, dolor sit amet consectetur adipisicing elit. In nostrum perspiciatis, ratione itaque doloribus tempore. Cum aut alias eius, rerum harum facilis, quod voluptates tenetur, dolore quibusdam laborum architecto officiis.
+                    </p>
+                    <br>
+                    <a href="#"><strong>Click here to view the Github live page</strong></a>
+                    <br><br>
+                    <a href="#"><strong>Click here to view repository on Github</strong></a>                    
+                </div>  
+            <!-- END PORTFOLIO -->
+            </div>
+
+            <div id="contact" class="" style="display: none;">
+
+                <div id="emailMe">
+
+                    <img class="sectionIcon" src="./images/mail.png">
+
+                    <h3>Contact</h3>
+                    <br>
+                    <a href="mailto:p.bernardhall@gmail.com">Click here to Email Me</a> 
+                
+                    <!-- <div id="copyToClip">
+                        <button id="copyToClipBtn">Copy to Clipboard</button>
+                        <textarea id="copyToClipText" type="text" readonly>p.bernardhall@gmail.com</textarea>
+                    </div> -->
+                <!-- END EMAIL -->
+                </div>
+    
+
+                <div id="resume"style="display: block; margin-top: 100px;">
+
+                    <img class="sectionIcon" src="./images/resumeFilled.png">
+
+                    <h3>Resume</h3>
+                    <br>
+                    <div id="resumeLink">
+                        <a class="emailLink" href="https://drive.google.com/file/d/0B1MS3Pf3kK6wOVdjQlFfZ2V6Z2VJSXFDY2NBSkhHcGdmbmRN/view?usp=sharing" target="_blank">
+                            Click here to view my resume on Google drive
+                        </a>
+                    </div>
+
+                <!-- END RESUME -->
+                </div> 
+
+            <!-- END CONTACT -->
+            </div>
+
+        <!-- END CONTENT -->
+        </div>
+
+    </div>
+
+    <div class="footer">
+        <p style="margin: auto;">Paul Bernard-Hall</p>
+    </div>
+
+    <!-- Personal JS -->
+    <script src="script.js"></script>
+</body>
+</html>

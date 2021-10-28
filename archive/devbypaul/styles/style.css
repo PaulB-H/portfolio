@@ -1,0 +1,222 @@
+/* 
+  Headings  font-family: "EB+Garamond", serif;
+  Text      font-family: 'Nanum Gothic', sans-serif;
+  
+  Previously used fonts
+  Text      font-family: "Jura", sans-serif;
+  Headings  font-family: "Playfair Display", serif;
+  Headings  font-family: "Benne", serif;
+*/
+
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+  scrollbar-width: thin;
+  scrollbar-color: black #eee;
+}
+::-webkit-scrollbar {
+  height: 6px;
+  width: 12px;
+  background: #eee;
+}
+::-webkit-scrollbar-thumb {
+  background: #000000;
+  -webkit-border-radius: 1ex;
+  -webkit-box-shadow: 0px 1px 2px rgba(0, 0, 0, 0.75);
+}
+::-webkit-scrollbar-corner {
+  background: #fff;
+}
+
+h1,
+h2,
+h3,
+h4 {
+  font-family: "EB Garamond", serif;
+}
+p {
+  font-family: "Nanum Gothic", sans-serif;
+  font-size: 1.1em;
+}
+hr {
+  margin: 5px 0 5px 0;
+}
+a:hover,
+button:hover {
+  cursor: pointer;
+}
+
+#navguide {
+  position: absolute;
+  bottom: 3%;
+  user-select: none;
+  width: 100%;
+  text-align: center;
+  font-size: small !important;
+  display: none;
+}
+
+#overlay {
+  position: fixed;
+  display: none;
+  width: 100%;
+  height: 100%;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background-color: rgba(0, 0, 0, 0.5);
+  z-index: 10;
+  cursor: pointer;
+}
+
+.content {
+  display: grid;
+  grid-template-columns: repeat(10, 100vw);
+  grid-template-rows: 1fr;
+  overflow: scroll;
+  overflow-y: hidden;
+  height: 100%;
+  scroll-snap-type: both mandatory;
+
+  /* scroll-padding: 1rem;
+  grid-column-gap: 1rem;
+  grid-row-gap: 1rem;
+  padding: 1rem; */
+}
+/* Below seems to only works on phone swipe events */
+#home,
+#portfolio,
+#contact {
+  scroll-snap-stop: always;
+}
+.active {
+  scroll-snap-type: unset;
+}
+
+li {
+  scroll-snap-align: center;
+  display: inline-block;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  /* border-radius: 3px; */
+}
+
+.navScroll {
+  font-size: 2em;
+  position: absolute;
+  bottom: 1%;
+  font-family: "Jura", sans-serif;
+  user-select: none;
+}
+.navLeft {
+  left: 5%;
+}
+.navRight {
+  right: 5%;
+}
+
+.profile-img {
+  clip-path: circle(47.5% at 50% 52%);
+  -webkit-clip-path: circle(47.5% at 50% 52%);
+  margin: 10px;
+}
+
+#portfolioItems {
+  display: grid;
+  grid-template-areas: ".. .. ..";
+  /* background: black; */
+  grid-gap: 15px;
+}
+.portfolioItem {
+  width: 105px;
+  height: 105px;
+  /* border: 1px solid black; */
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  text-align: center;
+  /* background: #98b2d0; */
+  background: #e6f2ff;
+  border-radius: 10px;
+  -webkit-box-shadow: 0px 0px 3px 0px #000000;
+  box-shadow: 0px 0px 3px 0px #000000;
+}
+.portfolioItem:hover {
+  cursor: pointer;
+}
+.detailcontainer {
+  position: relative;
+  margin: 5px;
+  padding: 5px;
+  max-width: 600px;
+  flex-direction: column;
+  background: #e6f2ff;
+  border-radius: 10px;
+  box-shadow: 0px 0px 3px 0px #000000;
+}
+.projectHeader {
+  font-size: 2em;
+  text-align: center;
+  text-decoration: none;
+  /* margin-bottom: -10px; */
+}
+.projectSubhead {
+  font-weight: bold;
+  margin-bottom: 5px;
+}
+.projectDesc {
+  text-indent: 25px;
+  margin: 5px 5px;
+  text-align: justify;
+  line-height: 1.1em;
+}
+.detailcontainer a {
+  text-decoration: none;
+  margin-bottom: 5px;
+}
+.project-links {
+  max-width: max-content;
+}
+.project-links p {
+  padding: 5px 0;
+}
+.livelink,
+.repolink {
+  max-width: max-content;
+}
+
+.resetButton {
+  position: absolute;
+  bottom: 4%;
+  right: 0;
+  margin: auto 1% 1% auto;
+  min-width: max-content;
+  padding: 0 10px 0 10px;
+  box-shadow: 0px 0px 1px 0px #000;
+  border: 1px solid #a6aaae;
+  border-radius: 10px;
+  background: white;
+  font-size: 1.15em;
+  color: #505760;
+  position: relative;
+}
+.close-icon {
+  vertical-align: sub;
+  clip-path: circle(45% at 50% 50%);
+  -webkit-clip-path: circle(40% at 50% 50%);
+  margin-right: 3px;
+}
+
+#contact p {
+  margin: 10px;
+}
+
+@media only screen and (max-width: 360px) {
+  #portfolioItems {
+    grid-gap: 0px;
+  }
+}

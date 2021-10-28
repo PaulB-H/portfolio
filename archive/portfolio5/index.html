@@ -1,0 +1,304 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>PaulBH</title>
+    <!-- Custom CSS -->
+    <link rel="stylesheet" href="css/style.css">
+    <!-- Bootstrap -->
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css"
+        integrity="sha384-Vkoo8x4CGsO3+Hhxv8T/Q5PaXtkKtu6ug5TOeNV6gBiFeWPGFN9MuhOf23Q9Ifjh" crossorigin="anonymous">
+    <!-- Font Awesome -->
+    <script src="https://kit.fontawesome.com/301fc3fb33.js" crossorigin="anonymous"></script>
+</head>
+
+<body>
+
+    <nav id="my-nav" class="navbar navbar-expand-sm navbar-light bg-light fixed-top">
+        <div class="container">
+            <a class="navbar-brand" href="#">PaulBH</a>
+            <!-- <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNavAltMarkup"
+            aria-controls="navbarNavAltMarkup" aria-expanded="false" aria-label="Toggle navigation">
+            <span class="navbar-toggler-icon"></span>
+        </button> -->
+            <!-- <div class="collapse navbar-collapse" id="navbarNavAltMarkup"> -->
+            <div class="navbar-nav">
+                <a class="nav-item nav-link" href="#">Home <span class="sr-only">(current)</span></a>
+                <a class="nav-item nav-link" href="#projects-anchor">Projects</a>
+                <a class="nav-item nav-link" href="#about-me-anchor">About Me</a>
+            </div>
+            <!-- </div> -->
+        </div>
+    </nav>
+
+
+    <div id="jumbo" class="jumbotron jumbotron-fluid">
+        <div class="container">
+            <h1 class="display-4">Paul Bernard-Hall</h1>
+            <p class="lead">A web-developer with strong leadership skills and management experience looking for the
+                opportunity to be immersed in technology and learn every
+                day.
+            </p>
+            <p>
+                My current focus is becomming more confortable deploying LAMP / MERN apps from scratch. To do this I
+                have my own domain and VPS setup with root access. I am running Ubuntu on my virtual machine and I 
+                am enjoying learning how to install and configure each part of the stack, setup SSL certifications, 
+                and interact with everything over an SSH connection (Putty / Sublime with a plugin).
+            </p>
+        </div>
+    </div>
+
+    <div id="projects-anchor" class="anchor"></div>
+    <div id="projects-header" style="display: flex; justify-content: center; ">
+        <h1><span class="badge badge-secondary">Projects</span></h1>
+    </div>
+
+    <div id="projects" class="card-deck" style="margin-left: 0; margin-right: 0;">
+
+        <div id="project-card" class="card">
+            <img src="img/pokeball-300x200px.png" class="card-img-top" alt="...">
+            <div class="card-body">
+                <h5 class="card-title">PokeSim</h5>
+                <p class="card-text">Our first bootcamp group project. This was a fun way to learn about JS, AJAX, and
+                    third-party API's</p>
+                <div class="page-links">
+                    <a href="https://paulb-h.github.io/pokeSim/" target="_blank">
+                        <p>Live Site</p>
+                    </a>
+                    <i class="fas fa-link" style="margin: 0; padding: 0;"></i>
+                    <a href="https://github.com/PaulB-H/pokeSim" target="_blank">
+                        <p>GitHub Repo</p>
+                    </a>
+                </div>
+                <p class="card-text"><small class="text-muted">JS / HTML / CSS</small></p>
+            </div>
+        </div>
+
+        <div id="project-card" class="card">
+            <img src="img/weather-dash-300x200px.png" class="card-img-top" alt="...">
+            <div class="card-body">
+                <h5 class="card-title">Weather Dash</h5>
+                <p class="card-text">Using the OpenWeather API to retrieve weather data for cities.</p>
+                <div class="page-links">
+                    <a href="https://paulb-h.github.io/weatherDash/" target="_blank">
+                        <p>Live Site</p>
+                    </a>
+                    <i class="fas fa-link" style="margin: 0; padding: 0;"></i>
+                    <a href="https://github.com/Paulb-h/weatherDash" target="_blank">
+                        <p>GitHub Repo</p>
+                    </a>
+                </div>
+                <p class="card-text"><small class="text-muted">JS / HTML / CSS</small></p>
+            </div>
+        </div>
+
+        <div id="project-card" class="card">
+            <img src="img/fit-track-300x200px.png" class="card-img-top" alt="...">
+            <div class="card-body">
+                <h5 class="card-title">Fit Track</h5>
+                <p class="card-text">A solution to a personal problem. I needed a lightweight workout tracker with
+                    simple input, I am happy with how this project is going - WIP</p>
+                <div class="page-links">
+                    <a href="https://paulb-h.github.io/fit_track/" target="_blank">
+                        <p>Live Site</p>
+                    </a>
+                    <i class="fas fa-link" style="margin: 0; padding: 0;"></i>
+                    <a href="https://github.com/PaulB-H/fit_track" target="_blank">
+                        <p>GitHub Repo</p>
+                    </a>
+                </div>
+                <p class="card-text"><small class="text-muted">JS / HTML / CSS</small></p>
+            </div>
+        </div>
+
+
+    </div>
+
+    <div id="projects" class="card-deck">
+
+        <div id="project-card" class="card">
+            <img src="img/designs_by_tab.png" class="card-img-top" alt="...">
+            <div class="card-body">
+                <h5 class="card-title">Designs by Tabitha</h5>
+                <p class="card-text">
+                    Website for a designer to show products and work.
+                    Currently have an inefficient poll interval to "live" update the stock of masks.
+                    Working on building out a small order-management system.
+                </p>
+                    <div class="page-links">
+                    <a href="https://www.designsbytabitha.ca" target="_blank">
+                        <p>Live Site</p>
+                    </a>
+                    <i class="fas fa-link" style="margin: 0; padding: 0;"></i>
+                    <a href="https://github.com/PaulB-H/designs_by_tabitha" target="_blank">
+                        <p>GitHub Repo</p>
+                    </a>
+                </div>
+                <p class="card-text"><small class="text-muted">HTML/CSS/JS/JQUERY/PHP/MySQL</small></p>
+            </div>
+        </div>
+
+        <div id="project-card" class="card">
+            <img src="img/xcel-logo-300x200px.png" class="card-img-top" alt="...">
+            <div class="card-body">
+                <h5 class="card-title">xcelsolutions.ca</h5>
+                <p class="card-text">
+                    My first WordPress project for a tax / accounting company.
+                </p>
+                <div class="page-links">
+                    <a href="http://xcelsolutions.ca" target="_blank">
+                        <p>Live Site</p>
+                    </a>
+                    <i class="fas fa-link" style="margin: 0; padding: 0;"></i>
+                    <strike>
+                        <p>GitHub Repo</p>
+                    </strike>
+                </div>
+                <p class="card-text"><small class="text-muted">HTML / CSS / WordPress</small></p>
+            </div>
+        </div>
+
+        <div id="project-card" class="card">
+            <img src="img/fitness-hub-300x200px.png" class="card-img-top" alt="...">
+            <div class="card-body">
+                <h5 class="card-title">Fitness Hub</h5>
+                <p class="card-text">Second group project. Built using Node JS and an SQL DB, hosted on Heroku. Basic
+                    login & chat systems.</p>
+                <div class="page-links">
+                    <a href="https://fitness-hub-20191114.herokuapp.com/" target="_blank">
+                        <p>Live Site</p>
+                    </a>
+                    <i class="fas fa-link" style="margin: 0; padding: 0;"></i>
+                    <a href="https://github.com/PaulB-H/project2" target="_blank">
+                        <p>GitHub Repo</p>
+                    </a>
+                </div>
+                <p class="card-text"><small class="text-muted">Node JS / SQL / HTML / CSS</small></p>
+            </div>
+        </div>
+
+    </div>
+    
+    <div id="projects" class="card-deck" style="margin-left: 0; margin-right: 0;">
+
+<!--         <div id="project-card" class="card">
+            <img src="img/pokeball-300x200px.png" class="card-img-top" alt="...">
+            <div class="card-body">
+                <h5 class="card-title">PokeSim</h5>
+                <p class="card-text">Our first bootcamp group project. This was a fun way to learn about JS, AJAX, and
+                    third-party API's</p>
+                <div class="page-links">
+                    <a href="https://paulb-h.github.io/pokeSim/" target="_blank">
+                        <p>Live Site</p>
+                    </a>
+                    <i class="fas fa-link" style="margin: 0; padding: 0;"></i>
+                    <a href="https://github.com/PaulB-H/pokeSim" target="_blank">
+                        <p>GitHub Repo</p>
+                    </a>
+                </div>
+                <p class="card-text"><small class="text-muted">JS / HTML / CSS</small></p>
+            </div>
+        </div> -->
+
+        <div id="project-card" class="card">
+            <img src="img/care_yemen_logo.png" class="card-img-top" alt="...">
+            <div class="card-body">
+                <h5 class="card-title">Care for Yemen</h5>
+                <p class="card-text">
+                    A humanitarian effort by family. 
+                    <br>
+                    Free shared hosting, pre-set LAMP, no root.
+                    <br>
+                    Free SSL over CloudFlare
+                </p>
+                <div class="page-links">
+                    <a href="https://www.careforyemen.ca/new.html" target="_blank">
+                        <p>Live Site</p>
+                    </a>
+                    <i class="fas fa-link" style="margin: 0; padding: 0;"></i>
+                    <a href="#" target="_blank">
+                    <strike>
+                        <p>GitHub Repo</p>
+                    </strike>
+                    </a>
+                </div>
+                <p class="card-text"><small class="text-muted">JS / HTML / CSS</small></p>
+            </div>
+        </div>
+
+<!--         <div id="project-card" class="card">
+            <img src="img/fit-track-300x200px.png" class="card-img-top" alt="...">
+            <div class="card-body">
+                <h5 class="card-title">Fit Track</h5>
+                <p class="card-text">A solution to a personal problem. I needed a lightweight workout tracker with
+                    simple input, I am happy with how this project is going - WIP</p>
+                <div class="page-links">
+                    <a href="https://paulb-h.github.io/fit_track/" target="_blank">
+                        <p>Live Site</p>
+                    </a>
+                    <i class="fas fa-link" style="margin: 0; padding: 0;"></i>
+                    <a href="https://github.com/PaulB-H/fit_track" target="_blank">
+                        <p>GitHub Repo</p>
+                    </a>
+                </div>
+                <p class="card-text"><small class="text-muted">JS / HTML / CSS</small></p>
+            </div>
+        </div> -->
+
+
+    </div>
+
+
+    <div id="about-me-anchor" class="anchor"></div>
+    <div id="about-me" class="jumbotron">
+        <div class="container">
+            <div>
+                <h1 class="display-4">About Me</h1><img src="img/profile-300x403px.png">
+            </div>
+            <p class="lead">I have always enjoyed technology, solving problems, building things. Web development has
+                helped me find a way to combine all of these passions. <br /><br /> I graduated from a coding bootcamp
+                at the
+                University of Toronto in December 2019 where we covered a wealth of content from basic HTML to Node JS
+                and databases. <br /><br /> I am currently working to be more proficient in backend technologies, and
+                learn
+                how to
+                make mobile apps. Outside of coding I am a fitness enthusiast and always look forward to my days at the
+                gym. </p>
+            <div id="social-links">
+                <a href="https://www.linkedin.com/in/paulb-h/" target="_blank">
+                    <h4><i class="fab fa-linkedin"></i>LinkedIn</h4>
+                </a>
+                <a href="https://github.com/paulb-h" target="_blank">
+                    <h4><i class="fab fa-github"></i>GitHub</h4>
+                </a>
+                <!-- <h4><i class="fas fa-envelope-square"></i>Email</h4> -->
+            </div>
+            <!-- <hr class="my-4">
+        <p>It uses utility classes for typography and spacing to space content out within the larger container.</p>
+        <p class="lead">
+            <a class="btn btn-primary btn-lg" href="#" role="button">Learn more</a>
+        </p> -->
+        </div>
+    </div>
+
+
+    <div>
+        <!-- JQuery -->
+        <script src="https://code.jquery.com/jquery-3.4.1.min.js"
+            integrity="sha256-CSXorXvZcTkaix6Yvo6HppcZGetbYMGWSFlBw8HfCJo=" crossorigin="anonymous"></script>
+        <!-- Popper JS -->
+        <script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.0/dist/umd/popper.min.js"
+            integrity="sha384-Q6E9RHvbIyZFJoft+2mJbHaEWldlvI9IOYy5n3zV9zzTtmI3UksdQRVvoxMfooAo"
+            crossorigin="anonymous"></script>
+        <!-- Bootstrap -->
+        <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/js/bootstrap.min.js"
+            integrity="sha384-wfSDF2E50Y2D1uUdj0O3uMBJnjuUD4Ih7YwaYd1iqfktj0Uod8GCExl3Og8ifwB6"
+            crossorigin="anonymous"></script>
+        <!-- Custom JS -->
+        <script src="js/script.js"></script>
+    </div>
+</body>
+
+</html>
