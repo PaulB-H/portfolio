@@ -56,6 +56,8 @@ const fontsArr = [
   "Special Elite",
 ];
 
+let shadeInterv, clearInterv, drawInterv;
+
 window.addEventListener("resize", () => {
   // Check if window actually resized
   // On mobile scrolling can trigger this event
