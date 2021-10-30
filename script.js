@@ -106,5 +106,13 @@ window.addEventListener("resize", () => {
     canvas.height = window.innerHeight;
 
     initialWindowWidth = window.innerWidth;
+
+    window.clearInterval(drawInterv);
+    window.clearInterval(clearInterv);
+    window.clearInterval(shadeInterv);
+
+    drawIntervFunc();
+    shadeIntervFunc();
+    clearIntervFunc();
   }
 });
