@@ -4,8 +4,14 @@ window.onload = (e) => {
 
   let initialWindowWidth = window.innerWidth;
 
+  const mainHeight = document.getElementById("main").offsetHeight;
+
   canvas.width = window.innerWidth;
   canvas.height = window.innerHeight;
+
+  if (mainHeight > window.innerHeight) {
+    canvas.height = mainHeight;
+  }
 
   const techArr = [
     "HTML",
@@ -103,8 +109,14 @@ window.onload = (e) => {
     if (initialWindowWidth !== window.innerWidth) {
       // console.log("resize triggered, resizing canvas");
 
+      const mainHeight = document.getElementById("main").offsetHeight;
+
       canvas.width = window.innerWidth;
       canvas.height = window.innerHeight;
+
+      if (mainHeight > window.innerHeight) {
+        canvas.height = mainHeight;
+      }
 
       initialWindowWidth = window.innerWidth;
 
