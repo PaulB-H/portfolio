@@ -78,6 +78,15 @@ const drawIntervFunc = () => {
 };
 drawIntervFunc();
 
+const shadeIntervFunc = () => {
+  shadeInterv = window.setInterval(() => {
+    ctx.fillStyle = "rgba(0,0,0,0.05)";
+
+    ctx.fillRect(0, 0, canvas.width, canvas.height);
+  }, 50);
+};
+shadeIntervFunc();
+
 window.addEventListener("resize", () => {
   // Check if window actually resized
   // On mobile scrolling can trigger this event
