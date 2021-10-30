@@ -87,6 +87,14 @@ const shadeIntervFunc = () => {
 };
 shadeIntervFunc();
 
+const clearIntervFunc = () => {
+  clearInterv = window.setInterval(() => {
+    window.clearInterval(drawInterv);
+    window.clearInterval(shadeInterv);
+  }, 3000);
+};
+clearIntervFunc();
+
 window.addEventListener("resize", () => {
   // Check if window actually resized
   // On mobile scrolling can trigger this event
