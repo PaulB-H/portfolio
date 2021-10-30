@@ -63,7 +63,7 @@ window.onload = (e) => {
     "Special Elite",
   ];
 
-  let shadeInterv, clearInterv, drawInterv;
+  let shadeInterv, stopTimer, drawInterv;
 
   const drawIntervFunc = () => {
     ctx.textBaseline = "top";
@@ -94,13 +94,13 @@ window.onload = (e) => {
   };
   shadeIntervFunc();
 
-  const clearIntervFunc = () => {
-    clearInterv = window.setInterval(() => {
-      window.clearInterval(drawInterv);
+  const stopIntervTimeout = () => {
+    stopTimer = window.setTimeout(() => {
+      window.clearTimeout(drawInterv);
       window.clearInterval(shadeInterv);
     }, 3000);
   };
-  clearIntervFunc();
+  stopIntervTimeout();
 
   window.addEventListener("resize", () => {
     // Check if window actually resized
@@ -121,12 +121,12 @@ window.onload = (e) => {
       initialWindowWidth = window.innerWidth;
 
       window.clearInterval(drawInterv);
-      window.clearInterval(clearInterv);
+      window.clearTimeout(stopTimer);
       window.clearInterval(shadeInterv);
 
       drawIntervFunc();
       shadeIntervFunc();
-      clearIntervFunc();
+      stopIntervTimeout();
     }
   });
 };
