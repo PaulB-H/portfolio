@@ -80,7 +80,7 @@ drawIntervFunc();
 
 const shadeIntervFunc = () => {
   shadeInterv = window.setInterval(() => {
-    ctx.fillStyle = "rgba(0,0,0,0.05)";
+    ctx.fillStyle = "rgba(0,0,0,0.025)";
 
     ctx.fillRect(0, 0, canvas.width, canvas.height);
   }, 50);
