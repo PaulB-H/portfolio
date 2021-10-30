@@ -43,7 +43,7 @@ const colorArr = [
   "#9966CC",
 ];
 
-const fontsArr = [
+const fontArr = [
   "Audiowide",
   "Black Ops One",
   "Bungee",
@@ -57,6 +57,26 @@ const fontsArr = [
 ];
 
 let shadeInterv, clearInterv, drawInterv;
+
+const drawIntervFunc = () => {
+  ctx.textBaseline = "top";
+  ctx.textAlign = "left";
+
+  drawInterv = window.setInterval(() => {
+    const drawx = Math.ceil(Math.random() * canvas.width);
+    const drawy = Math.ceil(Math.random() * canvas.height);
+
+    const randomTech = techArr[Math.floor(Math.random() * techArr.length)];
+    const randomFont = fontArr[Math.floor(Math.random() * fontArr.length)];
+    const randomColor = colorArr[Math.floor(Math.random() * colorArr.length)];
+
+    ctx.font = `30px ${randomFont}`;
+    ctx.fillStyle = randomColor;
+
+    ctx.fillText(randomTech, drawx, drawy);
+  }, 50);
+};
+drawIntervFunc();
 
 window.addEventListener("resize", () => {
   // Check if window actually resized
