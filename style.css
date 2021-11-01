@@ -70,3 +70,16 @@ a:visited {
 .d-none {
   display: none;
 }
+
+img.me {
+  max-height: 250px;
+  clip-path: circle(45% at 50% 50%);
+  margin-bottom: -25px;
+  margin-top: -10px;
+}
+
+img.proj-img {
+  margin: 10px 0;
+  max-height: 150px;
+  max-width: 215px;
+}
