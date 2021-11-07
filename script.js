@@ -81,7 +81,7 @@ window.onload = (e) => {
       ctx.fillStyle = randomColor;
 
       ctx.fillText(randomTech, drawx, drawy);
-    }, 50);
+    }, 25);
   };
   drawIntervFunc();
 
