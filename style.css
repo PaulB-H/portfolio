@@ -56,6 +56,11 @@ main {
 #bio {
   text-align: center;
 }
+#businesscard {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
 
 h2 {
   margin-top: 10px;
@@ -109,6 +114,7 @@ img.proj-img {
   flex-direction: column;
   justify-content: center;
 }
+
 @media only screen and (min-width: 600px) {
   #main {
     max-width: 625px;
@@ -124,5 +130,11 @@ img.proj-img {
   }
   img.proj-img {
     margin: 30px 0;
+  }
+}
+
+@media only screen and (max-width: 395px) {
+  #businesscard {
+    display: block;
   }
 }
