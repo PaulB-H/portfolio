@@ -5,7 +5,7 @@
 <h5><small>Made with:</small><br /> HTML, CSS, JS, Canvas</h5>
 <h5><small>Served through:</small><br /> Ubuntu VPS, NGINX, PM2, CertBot</h5>
 
-<a href="https://devbypaul.ca" target="_blank">https://devbypaul.ca</a>
+<a href="https://paulbh.com" target="_blank">https://paulbh.com</a>
 
 <h2>Description</h2>
 <p>My current portfolio, along with a collection of past versions.</p>
