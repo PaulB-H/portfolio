@@ -2,8 +2,15 @@
 const canvas = document.getElementById("canvas");
 const ctx = canvas.getContext("2d");
 
-canvas.width = window.innerWidth;
-canvas.height = window.innerHeight;
+const setCanvasSize = () => {
+  if (window.innerWidth > document.querySelector("body").offsetWidth)
+    canvas.width = window.innerWidth;
+  else canvas.width = document.querySelector("body").offsetWidth;
+  if (window.innerHeight > document.querySelector("body").offsetHeight)
+    canvas.height = window.innerHeight;
+  else canvas.height = document.querySelector("body").offsetHeight;
+};
+setCanvasSize();
 
 const characters =
   "ABCDEFGHIJKLMNOPQRSTUVWXYZ123456789ｦｧｨｩｪｫｬｭｮｯｱｲｳｴｵｶｷｸｹｺｻｼｽｾｿﾀﾁﾂﾃﾄﾅﾆﾇﾈﾉﾊﾋﾌﾍﾎﾏﾐﾑﾒﾓﾔﾕﾖﾗﾘﾙﾚﾛﾜﾝ-ｦｧｨｩｪｫｬｭｮｯｱｲｳｴｵｶｷｸｹｺｻｼｽｾｿﾀﾁﾂﾃﾄﾅﾆﾇﾈﾉﾊﾋﾌﾍﾎﾏﾐﾑﾒﾓﾔﾕﾖﾗﾘﾙﾚﾛﾜﾝ-ｦｧｨｩｪｫｬｭｮｯｱｲｳｴｵｶｷｸｹｺｻｼｽｾｿﾀﾁﾂﾃﾄﾅﾆﾇﾈﾉﾊﾋﾌﾍﾎﾏﾐﾑﾒﾓﾔﾕﾖﾗﾘﾙﾚﾛﾜﾝ-ｦｧｨｩｪｫｬｭｮｯｱｲｳｴｵｶｷｸｹｺｻｼｽｾｿﾀﾁﾂﾃﾄﾅﾆﾇﾈﾉﾊﾋﾌﾍﾎﾏﾐﾑﾒﾓﾔﾕﾖﾗﾘﾙﾚﾛﾜﾝ";
@@ -84,7 +91,7 @@ const createWriteStream = () => {
 
     YLOC += fontSize;
 
-    if (YLOC > window.innerHeight + fontSize * 2) {
+    if (YLOC > canvas.offsetHeight + fontSize * 2) {
       window.clearInterval(drawInterval);
       colsActive--;
     }
@@ -97,9 +104,11 @@ const startWriting = window.setInterval(() => {
   createWriteStream();
 }, 300);
 
+const activeStreamsDiv = document.getElementById("active-streams");
 window.setInterval(() => {
   ctx.fillStyle = "rgba(0, 0, 0, 0.105)";
   ctx.fillRect(0, 0, canvas.width, canvas.height);
+  activeStreamsDiv.innerText = colsActive;
 }, 100);
 
 window.addEventListener("resize", () => {
