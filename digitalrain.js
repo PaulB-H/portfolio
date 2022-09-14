@@ -34,7 +34,7 @@ const randomColumn = () => {
   const columns = window.innerWidth / (0.7 * fontSize);
   return Math.ceil(Math.random() * columns);
 };
-const randomYStart = () => Math.floor(Math.random() * (10 * fontSize) * -1);
+const randomYStart = () => Math.floor(Math.random() * 10) * fontSize * -1;
 const randomSpeed = () => Math.floor(Math.random() * (250 - 50 + 1)) + 50;
 
 let colsActive = 0;
