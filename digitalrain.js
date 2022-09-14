@@ -48,10 +48,10 @@ const createWriteStream = () => {
 
   let colExist = false;
   colTracker.forEach((item, idx) => {
-    if (item.col === XLOC && item.date + 5000 > Date.now()) {
+    if (item.col === XLOC && item.date + 8000 > Date.now()) {
       colExist = true;
       return;
-    } else if (item.col === XLOC && item.date + 5000 < Date.now()) {
+    } else if (item.col === XLOC && item.date + 8000 < Date.now()) {
       colTracker.delete(item);
     }
   });
