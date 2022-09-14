@@ -87,7 +87,14 @@ const createWriteStream = () => {
       );
     }
 
+    // Last character
     if (lastChar) {
+      // Print clean square to clean glow from
+      // first characters shadow, resulting in cleaner
+      // looking trail left behind
+      ctx.fillStyle = "rgba(0, 0, 0, 1)";
+      ctx.fillRect(XLOC, YLOC - fontSize, 0.75 * fontSize, fontSize);
+
       ctx.fillStyle = `${secondColor}`;
       ctx.fillText(lastChar, XLOC + 3, YLOC - fontSize, 0.5 * fontSize);
       secondLastChar = lastChar;
