@@ -76,17 +76,24 @@ const createWriteStream = () => {
     ctx.fillStyle = "rgba(0, 0, 0, 1)";
     ctx.fillRect(XLOC, YLOC - 20 * fontSize, 0.75 * fontSize, fontSize);
 
+    // Second last character
     if (secondLastChar) {
       ctx.fillStyle = `${settledColor}`;
-      ctx.fillText(secondLastChar, XLOC, YLOC - fontSize * 2);
+      ctx.fillText(
+        secondLastChar,
+        XLOC + 3,
+        YLOC - fontSize * 2,
+        0.5 * fontSize
+      );
     }
 
     if (lastChar) {
       ctx.fillStyle = `${secondColor}`;
-      ctx.fillText(lastChar, XLOC, YLOC - fontSize);
+      ctx.fillText(lastChar, XLOC + 3, YLOC - fontSize, 0.5 * fontSize);
       secondLastChar = lastChar;
     }
 
+    // New character
     ctx.fillStyle = `${initialColor}`;
     ctx.shadowColor = "rgba(228,230,227,1)";
     ctx.shadowBlur = "5";
