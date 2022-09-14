@@ -85,7 +85,7 @@ const createWriteStream = () => {
     ctx.fillStyle = `${initialColor}`;
     ctx.shadowColor = "rgba(228,230,227,1)";
     ctx.shadowBlur = "5";
-    ctx.fillText(randChar, XLOC, YLOC);
+    ctx.fillText(randChar, XLOC + 3, YLOC, 0.5 * fontSize);
     ctx.shadowColor = null;
     ctx.shadowBlur = null;
 
