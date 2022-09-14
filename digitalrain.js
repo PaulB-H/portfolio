@@ -68,8 +68,13 @@ const createWriteStream = () => {
       Math.floor(Math.random() * characters.length - 1)
     );
 
-    ctx.fillStyle = "rgba(0, 0, 0, 0.75)";
-    ctx.fillRect(XLOC, YLOC, 0.7 * fontSize, fontSize);
+    // Clean up crew
+    ctx.fillStyle = "rgba(0, 0, 0, 0.25)";
+    ctx.fillRect(XLOC, YLOC - 18 * fontSize, 0.75 * fontSize, fontSize);
+    ctx.fillStyle = "rgba(0, 0, 0, 0.5)";
+    ctx.fillRect(XLOC, YLOC - 19 * fontSize, 0.75 * fontSize, fontSize);
+    ctx.fillStyle = "rgba(0, 0, 0, 1)";
+    ctx.fillRect(XLOC, YLOC - 20 * fontSize, 0.75 * fontSize, fontSize);
 
     if (secondLastChar) {
       ctx.fillStyle = `${settledColor}`;
@@ -91,7 +96,7 @@ const createWriteStream = () => {
 
     YLOC += fontSize;
 
-    if (YLOC > canvas.offsetHeight + fontSize * 2) {
+    if (YLOC > canvas.offsetHeight + fontSize * 20) {
       window.clearInterval(drawInterval);
       colsActive--;
     }
