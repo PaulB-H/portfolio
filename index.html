@@ -10,11 +10,12 @@
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Cutive+Mono&family=IBM+Plex+Mono&display=swap" rel="stylesheet">
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/4.1.1/animate.min.css" />
-  <link rel="stylesheet" href="./style.css">
+  <link rel="stylesheet" href="./rain.css">
 </head>
 
 <body>
   <canvas id="canvas"></canvas>
+  <canvas id="canvas2"></canvas>
 
   <header class="animate__animated animate__fadeIn box-shadow">
     <h1>Paul Bernard-Hall</h1>
@@ -23,13 +24,22 @@
   <main>
     <div id="profile" class="animate__animated animate__fadeIn animate__delay-1s box-shadow"
       style="--animate-delay: 0.5s;">
-      <p>I love building things, currently with JavaScript & Node.js</p>
+      <p class="animate__animated animate__fadeIn animate__delay-1s box-shadow" style="--animate-delay: 0.75s;">I love
+        building things with JS</p>
+      <br />
+      <p class="animate__animated animate__fadeIn animate__delay-1s box-shadow" style="--animate-delay: 1s;">Looking for
+        any
+        development opportunities</p>
     </div>
   </main>
 
   <aside class="animate__animated animate__fadeIn animate__delay-1s box-shadow"
-    style="--animate-delay: 0.75s; position: absolute; bottom: 0">
-    Active Streams: <span id="active-streams"></span>
+    style="--animate-delay: 1.25s; position: absolute; bottom: 0">
+    <!-- Active Streams: <span id="active-streams"></span> -->
+    <p style="margin-bottom: 10px;"><a target="_blank" href="https://github.com/paulb-h">github.com/paulb-h</a></p>
+    <p><a target="_blank" href="https://www.linkedin.com/in/paulb-h/">linkedin.com/in/paulb-h</a></p>
+    <br />
+    Code: <a target="_blank" href="https://github.com/paulb-h/digitalrain">githib.com/paulb-h/digitalrain</a>
   </aside>
 
   <script src="./digitalrain.js"></script>
