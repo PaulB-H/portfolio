@@ -10,7 +10,44 @@
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Cutive+Mono&family=IBM+Plex+Mono&display=swap" rel="stylesheet">
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/4.1.1/animate.min.css" />
-  <link rel="stylesheet" href="./rain.css">
+  <link rel="stylesheet" href="./digitalrain.css">
+  <style>
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+      color: white;
+    }
+
+    body {
+      background-color: black;
+      font-family: "Cutive Mono", monospace;
+    }
+
+    #canvas,
+    #canvas2 {
+      z-index: -1;
+      position: absolute;
+      top: 0;
+    }
+
+    a {
+      font-size: 20px;
+    }
+
+    .box-shadow {
+      background-color: rgba(0, 0, 0, 0.75);
+      -webkit-box-shadow: 0px 0px 15px 15px rgba(0, 0, 0, 0.75);
+      box-shadow: 0px 0px 15px 15px rgba(0, 0, 0, 0.75);
+    }
+
+    header,
+    main,
+    footer {
+      max-width: 400px;
+      margin: 15px;
+    }
+  </style>
 </head>
 
 <body>
@@ -27,20 +64,40 @@
       <p class="animate__animated animate__fadeIn animate__delay-1s box-shadow" style="--animate-delay: 0.75s;">I love
         building things with JS</p>
       <br />
-      <p class="animate__animated animate__fadeIn animate__delay-1s box-shadow" style="--animate-delay: 1s;">Looking for
-        any
-        development opportunities</p>
     </div>
   </main>
 
-  <aside class="animate__animated animate__fadeIn animate__delay-1s box-shadow"
+  <footer class="animate__animated animate__fadeIn animate__delay-1s box-shadow"
     style="--animate-delay: 1.25s; position: absolute; bottom: 0">
-    <!-- Active Streams: <span id="active-streams"></span> -->
+    <div id="details">
+      <button id="toggle-details-btn" class="big-gray-btn" onclick="toggleDetailsDiv()">Toggle Details</button>
+      <div id="debug">
+        <p>Total Streams: <span id="active-streams"></span></p>
+        <p>Min Length: <span id="min-length"></span></p>
+        <p>Max Length: <span id="max-length"></span></p>
+        <p>Total Intervals: <span id="num-intervals"></span></p>
+        <p>Max Speed: <span id="max-speed"></span>ms</p>
+        <p>Min Speed: <span id="min-speed"></span>ms</p>
+        <p>Font Size: <span id="font-size"></span>px</p>
+        <label for="set-font-size">Set Font Size</label>
+        <input id="set-font-size" autocomplete="off" type="range" min="10" max="100" value="20"
+          oninput="getFontSizeFromSlider()">
+      </div>
+
+      <div id="profiles">
+        <button id="matrix" class="big-gray-btn" onclick="setTheme('matrix'); discoMode(true)">Matrix</button>
+        <button id="matrix" class="big-gray-btn" onclick="setTheme('fire'); discoMode(true)">Fire</button>
+        <button id="matrix" class="big-gray-btn" onclick="setTheme('ice'); discoMode(true)">Ice</button>
+        <button id="matrix" class="big-gray-btn" onclick="setTheme('pink'); discoMode(true)">Pink</button>
+        <button id="matrix" class="big-gray-btn" onclick="setTheme('vanu'); discoMode(true)">Vanu</button>
+        <button id="disco" class="big-gray-btn" onclick="discoMode()">Disco</button>
+      </div>
+    </div>
     <p style="margin-bottom: 10px;"><a target="_blank" href="https://github.com/paulb-h">github.com/paulb-h</a></p>
-    <p><a target="_blank" href="https://www.linkedin.com/in/paulb-h/">linkedin.com/in/paulb-h</a></p>
-    <br />
-    Code: <a target="_blank" href="https://github.com/paulb-h/digitalrain">githib.com/paulb-h/digitalrain</a>
-  </aside>
+    <p style="margin-bottom: 10px;"><a target="_blank"
+        href="https://www.linkedin.com/in/paulb-h/">linkedin.com/in/paulb-h</a></p>
+    <a target="_blank" href="https://github.com/paulb-h/digitalrain">githib.com/paulb-h/digitalrain</a>
+  </footer>
 
   <script src="./digitalrain.js"></script>
 </body>

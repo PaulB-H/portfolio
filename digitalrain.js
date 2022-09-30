@@ -8,29 +8,28 @@ const characters =
   "MATRIXMATRIXMATRIXMATRIXMAØ1Ø1Ø1Ø1Ø#$%@&#$%@&ｦｧｨｩｪｫｬｭｮｯｱｲｳｴｵｶｷｸｹｺｻｼｽｾｿﾀﾁﾂﾃﾄﾅﾇﾈﾉﾊﾋﾌﾍﾎﾏﾐﾑﾒﾓﾔﾕﾖﾗﾘﾙﾚﾛﾜﾝｦｧｨｩｪｫｬｭｮｯｱｲｳｴｵｶｷｸｹｺｻｼｽｾｿﾀﾁﾂﾃﾄﾅﾇﾈﾉﾊﾋﾌﾍﾎﾏﾐﾑﾒﾓﾔﾕﾖﾗﾘﾙﾚﾛﾜﾝｦｧｨｩｪｫｬｭｮｯｱｲｳｴｵｶｷｸｹｺｻｼｽｾｿﾀﾁﾂﾃﾄﾅﾇﾈﾉﾊﾋﾌﾍﾎﾏﾐﾑﾒﾓﾔﾕﾖﾗﾘﾙﾚﾛﾜﾝｦｧｨｩｪｫｬｭｮｯｱｲｳｴｵｶｷｸｹｺｻｼｽｾｿﾀﾁﾂﾃﾄﾅﾇﾈﾉﾊﾋﾌﾍﾎﾏﾐﾑﾒﾓﾔﾕﾖﾗﾘﾙﾚﾛﾜﾝ";
 
 // Spans to update with stream info...
-// const mainDetailsDiv = document.getElementById("details");
-// const activeStreamsSpan = document.getElementById("active-streams");
-// const streamMaxLengthSpan = document.getElementById("max-length");
-// const streamMinLengthSpan = document.getElementById("min-length");
-// const numOfIntervalsSpan = document.getElementById("num-intervals");
-// const streamMaxSpeedSpan = document.getElementById("max-speed");
-// const streamMinSpeedSpan = document.getElementById("min-speed");
-// const streamFontSize = document.getElementById("font-size");
-// const setFontSizeInput = document.getElementById("set-font-size");
-// const toggleDetailsButton = document.getElementById("toggle-details-btn");
+const mainDetailsDiv = document.getElementById("details");
+const activeStreamsSpan = document.getElementById("active-streams");
+const streamMaxLengthSpan = document.getElementById("max-length");
+const streamMinLengthSpan = document.getElementById("min-length");
+const numOfIntervalsSpan = document.getElementById("num-intervals");
+const streamMaxSpeedSpan = document.getElementById("max-speed");
+const streamMinSpeedSpan = document.getElementById("min-speed");
+const streamFontSize = document.getElementById("font-size");
+const setFontSizeInput = document.getElementById("set-font-size");
+const toggleDetailsButton = document.getElementById("toggle-details-btn");
 // ... and a function update them
 const updateReadout = () => {
-  // activeStreamsSpan.innerText = streamProperties.maxStreams;
-  // streamMaxLengthSpan.innerText = streamProperties.maxLength;
-  // streamMinLengthSpan.innerText = streamProperties.minLength;
-  // numOfIntervalsSpan.innerText = streamProperties.maxIntervals;
-  // streamFontSize.innerText = streamProperties.fontSize;
-  // streamMaxSpeedSpan.innerText = streamProperties.maxSpeed;
-  // streamMinSpeedSpan.innerText = streamProperties.minSpeed;
+  activeStreamsSpan.innerText = streamProperties.maxStreams;
+  streamMaxLengthSpan.innerText = streamProperties.maxLength;
+  streamMinLengthSpan.innerText = streamProperties.minLength;
+  numOfIntervalsSpan.innerText = streamProperties.maxIntervals;
+  streamFontSize.innerText = streamProperties.fontSize;
+  streamMaxSpeedSpan.innerText = streamProperties.maxSpeed;
+  streamMinSpeedSpan.innerText = streamProperties.minSpeed;
 };
 const toggleDetailsDiv = () => {
   const allDetails = document.querySelectorAll("#details div");
-  console.log(allDetails);
   allDetails.forEach((element, idx) => {
     element.classList.contains("d-none")
       ? element.classList.remove("d-none")
@@ -40,6 +39,9 @@ const toggleDetailsDiv = () => {
     ? toggleDetailsButton.classList.remove("fade-button")
     : toggleDetailsButton.classList.add("fade-button");
 };
+//* Calling it here because we want it to start closed on portfolio */
+toggleDetailsDiv();
+//* */
 let getFontTimeout;
 const getFontSizeFromSlider = () => {
   streamFontSize.innerText = setFontSizeInput.value;
@@ -206,8 +208,7 @@ const calculateMaxStreams = () => {
 
   if (totalStreams > 15000) totalStreams = 15000;
 
-  // streamProperties.maxStreams = totalStreams;
-  // activeStreamsSpan.innerText = totalStreams;
+  streamProperties.maxStreams = totalStreams;
   return totalStreams;
 };
 
