@@ -10,23 +10,32 @@ const characters =
 // Spans to update with stream info...
 const mainDetailsDiv = document.getElementById("details");
 const activeStreamsSpan = document.getElementById("active-streams");
-const streamMaxLengthSpan = document.getElementById("max-length");
+const adjustTotalStreamSpan = document.getElementById("adjust-total");
+const adjustTotalStreamSlider = document.getElementById("adjust-total-streams");
 const streamMinLengthSpan = document.getElementById("min-length");
+const streamMaxLengthSpan = document.getElementById("max-length");
+const setMinLenSlider = document.getElementById("set-min-length");
+const setMaxLenSlider = document.getElementById("set-max-length");
 const numOfIntervalsSpan = document.getElementById("num-intervals");
-const streamMaxSpeedSpan = document.getElementById("max-speed");
-const streamMinSpeedSpan = document.getElementById("min-speed");
-const streamFontSize = document.getElementById("font-size");
-const setFontSizeInput = document.getElementById("set-font-size");
+const fastestIntervalSpan = document.getElementById("fastest-interval");
+const slowestIntervalSpan = document.getElementById("slowest-interval");
+const setFastestSlider = document.getElementById("set-fastest-interval");
+const setSlowestSlider = document.getElementById("set-slowest-interval");
+const streamFontSizeSpan = document.getElementById("font-size");
+const setFontSizeSlider = document.getElementById("set-font-size");
 const toggleDetailsButton = document.getElementById("toggle-details-btn");
+const toggleBoldCheckbox = document.getElementById("bold-checkbox");
+const toggleShadingCheckbox = document.getElementById("shading-checkbox");
 // ... and a function update them
 const updateReadout = () => {
   activeStreamsSpan.innerText = streamProperties.maxStreams;
   streamMaxLengthSpan.innerText = streamProperties.maxLength;
   streamMinLengthSpan.innerText = streamProperties.minLength;
   numOfIntervalsSpan.innerText = streamProperties.maxIntervals;
-  streamFontSize.innerText = streamProperties.fontSize;
-  streamMaxSpeedSpan.innerText = streamProperties.maxSpeed;
-  streamMinSpeedSpan.innerText = streamProperties.minSpeed;
+  streamFontSizeSpan.innerText = streamProperties.fontSize;
+  fastestIntervalSpan.innerText = streamProperties.fastestInterval;
+  slowestIntervalSpan.innerText = streamProperties.slowestInterval;
+  adjustTotalStreamSpan.innerText = streamProperties.maxStreamAdjustment * 1000;
 };
 const toggleDetailsDiv = () => {
   const allDetails = document.querySelectorAll("#details div");
@@ -39,27 +48,94 @@ const toggleDetailsDiv = () => {
     ? toggleDetailsButton.classList.remove("fade-button")
     : toggleDetailsButton.classList.add("fade-button");
 };
-//* Calling it here because we want it to start closed on portfolio */
-toggleDetailsDiv();
-//* */
+
+let adjustTotalStreamTimeout;
+adjustTotalStreamSlider.addEventListener("input", (e) => {
+  adjustTotalStreamSpan.innerText = e.target.value * 1000;
+  window.clearTimeout(adjustTotalStreamTimeout);
+  adjustTotalStreamTimeout = window.setTimeout(() => {
+    clearAllIntervals();
+    setCanvasSize();
+    streamProperties.maxStreamAdjustment = parseFloat(e.target.value);
+    genStreamsAndIntervals();
+    updateReadout();
+  }, 750);
+});
+
+let setMinLenTimeout;
+setMinLenSlider.addEventListener("input", (e) => {
+  window.clearTimeout(setMinLenTimeout);
+  if (parseInt(e.target.value) > parseInt(setMaxLenSlider.value))
+    e.target.value = setMaxLenSlider.value;
+  streamMinLengthSpan.innerText = e.target.value;
+  setMinLenTimeout = window.setTimeout(() => {
+    clearAllIntervals();
+    setCanvasSize();
+    streamProperties.minLength = parseInt(e.target.value);
+    genStreamsAndIntervals();
+  }, 750);
+});
+let setMaxLenTimeout;
+setMaxLenSlider.addEventListener("input", (e) => {
+  window.clearTimeout(setMaxLenTimeout);
+  if (parseInt(e.target.value) < parseInt(setMinLenSlider.value))
+    e.target.value = setMinLenSlider.value;
+  streamMaxLengthSpan.innerText = e.target.value;
+  setMaxLenTimeout = window.setTimeout(() => {
+    clearAllIntervals();
+    setCanvasSize();
+    streamProperties.maxLength = parseInt(e.target.value);
+    genStreamsAndIntervals();
+  }, 750);
+});
+
+let setFastestTimeout;
+setFastestSlider.addEventListener("input", (e) => {
+  window.clearTimeout(setFastestTimeout);
+  if (parseInt(e.target.value) > parseInt(setSlowestSlider.value))
+    e.target.value = setSlowestSlider.value;
+  fastestIntervalSpan.innerText = e.target.value;
+  setFastestTimeout = window.setTimeout(() => {
+    setStreamSpeed(null, parseInt(e.target.value));
+  }, 750);
+});
+let setSlowestTimeout;
+setSlowestSlider.addEventListener("input", (e) => {
+  window.clearTimeout(setSlowestTimeout);
+  if (parseInt(e.target.value) < parseInt(setFastestSlider.value))
+    e.target.value = setFastestSlider.value;
+  slowestIntervalSpan.innerText = e.target.value;
+  setSlowestTimeout = window.setTimeout(() => {
+    setStreamSpeed(parseInt(e.target.value), null);
+  }, 750);
+});
+
 let getFontTimeout;
 const getFontSizeFromSlider = () => {
-  streamFontSize.innerText = setFontSizeInput.value;
+  streamFontSizeSpan.innerText = setFontSizeSlider.value;
   window.clearInterval(getFontTimeout);
   getFontTimeout = window.setTimeout(() => {
-    setFontSize(setFontSizeInput.value);
+    setFontSize(parseInt(setFontSizeSlider.value));
   }, 1500);
 };
 
+toggleBoldCheckbox.addEventListener("change", (e) => {
+  if (e.target.checked) streamProperties.bold = true;
+  else streamProperties.bold = false;
+  clearAllIntervals();
+  setCanvasSize();
+  genStreamsAndIntervals();
+});
+toggleShadingCheckbox.addEventListener("change", (e) => {
+  if (e.target.checked) streamProperties.shading = true;
+  else streamProperties.shading = false;
+});
+
 // Canvas sizing
 const setCanvasSize = () => {
-  if (window.innerWidth > document.querySelector("body").offsetWidth) {
-    canvas.width = window.innerWidth;
-    canvas2.width = window.innerWidth;
-  } else {
-    canvas.width = document.querySelector("body").offsetWidth;
-    canvas2.width = document.querySelector("body").offsetWidth;
-  }
+  canvas.width = document.querySelector("body").offsetWidth;
+  canvas2.width = document.querySelector("body").offsetWidth;
+
   if (window.innerHeight > document.querySelector("body").offsetHeight) {
     canvas.height = window.innerHeight;
     canvas2.height = window.innerHeight;
@@ -70,7 +146,7 @@ const setCanvasSize = () => {
 
   ctx.translate(canvas.width, 0);
   ctx.scale(-1, 1);
-  ctx2.translate(canvas.width, 0);
+  ctx2.translate(canvas2.width, 0);
   ctx2.scale(-1, 1);
 
   ctx.fillStyle = "black";
@@ -86,44 +162,76 @@ const streamProperties = {
   fontSize: 20,
 
   minLength: 5,
-  maxLength: 20,
+  maxLength: 25,
 
-  minSpeed: 500,
-  maxSpeed: 50,
+  slowestInterval: 500,
+  fastestInterval: 10,
 
   maxIntervals: 100,
   maxStreams: null,
+
+  maxStreamAdjustment: 0.1,
+
+  bold: true,
+  shading: true,
 };
 
-const changeStreamProperties = (color1, color2, color3, fontSize) => {
-  streamProperties.initialColor = color1;
-  streamProperties.secondColor = color2;
-  streamProperties.settledColor = color3;
-  if (fontSize) {
-    streamProperties.fontSize = fontSize;
-    setCanvasSize();
-  }
+const changeDiscoColors = (color1, color2, color3) => {
+  if (color1) streamProperties.initialColor = color1;
+  if (color2) streamProperties.secondColor = color2;
+  if (color3) streamProperties.settledColor = color3;
 };
-const setTheme = (themeName, fontSize) => {
-  switch (themeName.toLowerCase()) {
-    case "matrix":
-      changeStreamProperties("#e4e6e3", "#6cfe6b", "#00dd00", fontSize);
-      break;
-    case "fire":
-      changeStreamProperties("Yellow", "Orange", "Red", fontSize);
-      break;
-    case "ice":
-      changeStreamProperties("aqua", "skyblue", "darkcyan", fontSize);
-      break;
-    case "pink":
-      changeStreamProperties("lightpink", "pink", "palevioletred", fontSize);
-      break;
-    case "vanu":
-      changeStreamProperties("#EA3FFA", "#C187E0", "#8115F5", fontSize);
-      break;
-    default:
-      break;
-  }
+
+const changeStreamColors = (color1, color2, color3) => {
+  window.clearInterval(discoInterval);
+  if (color1) streamProperties.initialColor = color1;
+  if (color2) streamProperties.secondColor = color2;
+  if (color3) streamProperties.settledColor = color3;
+};
+const useTheseColors = () => {
+  const color1 = document.getElementById("color1").value;
+  const color2 = document.getElementById("color2").value;
+  const color3 = document.getElementById("color3").value;
+  changeStreamColors(color1, color2, color3);
+};
+const themes = [
+  {
+    name: "matrix",
+    color1: "#e4e6e3",
+    color2: "#6cfe6b",
+    color3: "#00dd00",
+  },
+  {
+    name: "fire",
+    color1: "yellow",
+    color2: "orange",
+    color3: "red",
+  },
+  {
+    name: "ice",
+    color1: "aqua",
+    color2: "skyblue",
+    color3: "darkcyan",
+  },
+  {
+    name: "pink",
+    color1: "lightpink",
+    color2: "pink",
+    color3: "palevioletred",
+  },
+  {
+    name: "vanu",
+    color1: "#EA3FFA",
+    color2: "#C187E0",
+    color3: "#8115F5",
+  },
+];
+const setTheme = (themeName) => {
+  themes.forEach((theme) => {
+    if (theme.name === themeName.toLowerCase()) {
+      changeStreamColors(theme.color1, theme.color2, theme.color3);
+    }
+  });
 };
 
 const setFontSize = (fontSize) => {
@@ -134,17 +242,12 @@ const setFontSize = (fontSize) => {
   } else if (fontSize > 100) {
     streamProperties.fontSize = 100;
   } else {
-    streamProperties.fontSize = parseInt(setFontSizeInput.value);
+    streamProperties.fontSize = fontSize;
   }
 
   setCanvasSize();
 
-  genStreamsAndIntervals(
-    streamProperties.maxSpeed,
-    streamProperties.minSpeed,
-    streamProperties.maxIntervals,
-    calculateMaxStreams()
-  );
+  genStreamsAndIntervals();
 };
 
 const setStreamLength = (min = null, max = null) => {
@@ -152,306 +255,271 @@ const setStreamLength = (min = null, max = null) => {
   if (min) streamProperties.minLength = min;
   if (max) streamProperties.maxLength = max;
   setCanvasSize();
-  genStreamsAndIntervals(
-    streamProperties.maxSpeed,
-    streamProperties.minSpeed,
-    streamProperties.maxIntervals,
-    calculateMaxStreams()
-  );
+  genStreamsAndIntervals();
   updateReadout();
 };
 
-const setStreamSpeed = (min = null, max = null) => {
+const setStreamSpeed = (slowestInterval = null, fastestInterval = null) => {
+  if (slowestInterval && fastestInterval) {
+    if (slowestInterval < fastestInterval) return;
+  }
   clearAllIntervals();
-  if (min) streamProperties.minSpeed = min;
-  if (max) streamProperties.maxSpeed = max;
+  if (slowestInterval) streamProperties.slowestInterval = slowestInterval;
+  if (fastestInterval) streamProperties.fastestInterval = fastestInterval;
   setCanvasSize();
-  genStreamsAndIntervals(
-    streamProperties.maxSpeed,
-    streamProperties.minSpeed,
-    streamProperties.maxIntervals,
-    calculateMaxStreams()
-  );
+  genStreamsAndIntervals();
   updateReadout();
 };
-// END streamProperties & functions
+/* END streamProperties & functions */
 
-// Interval Management
-let intervalStore = [];
-const clearAllIntervals = () => {
-  intervalStore.forEach((interval, idx) => {
-    window.clearInterval(interval);
-  });
-};
+// Stream Generation & Update
+const getTotalColumns = () =>
+  window.innerWidth / (0.9 * streamProperties.fontSize);
 
-// Stream Generation & Main Draw (updateStreams)
 const randomColumn = () => {
-  const columns = window.innerWidth / (0.7 * streamProperties.fontSize);
+  const columns = getTotalColumns();
   return Math.floor(Math.random() * columns);
 };
 
 const randomYStart = () => {
-  return (
-    Math.floor(Math.random() * canvas.height) * streamProperties.fontSize * -1
-  );
+  return -1 - streamProperties.fontSize * Math.ceil(Math.random() * 10);
 };
 
 const calculateMaxStreams = () => {
-  const columns = Math.floor(
-    window.innerWidth / (0.7 * streamProperties.fontSize)
+  const columns = getTotalColumns();
+  const totalStreams = Math.floor(
+    streamProperties.maxStreamAdjustment *
+      (columns * (canvas.height / streamProperties.maxLength))
   );
-  let totalStreams = Math.floor(
-    columns * (canvas.height / streamProperties.maxLength)
-  );
-
-  totalStreams = Math.floor(0.5 * totalStreams);
-
-  if (totalStreams > 15000) totalStreams = 15000;
 
   streamProperties.maxStreams = totalStreams;
+  activeStreamsSpan.innerText = totalStreams;
   return totalStreams;
 };
 
-const genStreamsAndIntervals = (
-  minSpeed,
-  maxSpeed,
-  numOfIntervals,
-  numOfStreams
-) => {
-  const allSets = [];
-  for (let i = 0; i < numOfIntervals; i++) {
-    allSets.push(new Set());
+const clearAllIntervals = () => {
+  streamIntervalStore.forEach((interval, idx) => {
+    window.clearInterval(interval);
+  });
+  streamIntervalStore = [];
+  window.clearInterval(generatingInterval);
+  arrayOfStreamSets = [];
+};
+
+// Each set item contains multiple different stream objects
+let arrayOfStreamSets = [];
+const fillStreams = () => {
+  let numOfStreams = calculateMaxStreams();
+
+  for (let i = 0; i < streamProperties.maxIntervals; i++) {
+    arrayOfStreamSets.push(new Set());
   }
 
-  do {
-    const randStream = Math.floor(Math.random() * allSets.length);
+  for (let i = 0; i < numOfStreams; i++) {
+    const randomSet = Math.floor(Math.random() * arrayOfStreamSets.length);
+    const min = Math.ceil(streamProperties.minLength);
+    const max = Math.floor(streamProperties.maxLength);
 
-    allSets[randStream].add({
-      XLOC: Math.floor(randomColumn() * 0.7 * streamProperties.fontSize),
+    const newStream = {
+      XLOC: Math.floor(randomColumn() * 0.9 * streamProperties.fontSize),
       YLOC: randomYStart(),
-      streamLength:
-        Math.ceil(Math.random() * streamProperties.maxLength) +
-        streamProperties.minLength,
+      streamLength: Math.floor(Math.random() * (max - min + 1)) + min,
       firstChar: null,
       secondChar: null,
-    });
-    numOfStreams--;
-  } while (numOfStreams > 0);
+    };
 
-  for (let i = 0; i < numOfIntervals; i++) {
-    const randSpeed =
-      Math.floor(Math.random() * streamProperties.minSpeed) +
-      streamProperties.maxSpeed;
-    let newInterval = window.setInterval(() => {
-      updateStreams(allSets[i]);
-    }, randSpeed);
-    intervalStore.push(newInterval);
+    arrayOfStreamSets[randomSet].add(newStream);
   }
+};
 
+// Each set of stream items is assigned to a random interval
+// which triggers the draw update for the streams in that set
+let streamIntervalStore = [];
+let generatingInterval;
+const startGeneratingInterval = () => {
+  generatingInterval = window.setInterval(() => {
+    if (streamIntervalStore.length >= 100) {
+      window.clearInterval(generatingInterval);
+      return;
+    }
+    const length = streamIntervalStore.length;
+    const randSpeed =
+      Math.floor(Math.random() * streamProperties.slowestInterval) +
+      streamProperties.fastestInterval;
+    let newInterval = window.setInterval(() => {
+      updateStreams(arrayOfStreamSets[length]);
+    }, randSpeed);
+    streamIntervalStore.push(newInterval);
+  }, 150);
+};
+
+const genStreamsAndIntervals = () => {
+  fillStreams();
+  startGeneratingInterval();
   updateReadout();
 };
 
 const updateStreams = (set) => {
   set.forEach((item, idx) => {
     ctx.font = `${streamProperties.fontSize}px "Cutive Mono", monospace`;
+    if (streamProperties.bold === true) {
+      ctx.font = `bold ${streamProperties.fontSize}px "Cutive Mono", monospace`;
+    }
+
     ctx.textBaseline = "top";
 
-    const fontSizeMinus7Percent =
-      streamProperties.fontSize - (7 / 100) * streamProperties.fontSize;
+    // If I want to tweak column width
+    // this may be useful again...
+    let rectTrim = 1 * streamProperties.fontSize;
+    // if (streamProperties.bold === true) {
+    //   rectTrim = 1 * streamProperties.fontSize;
+    // }
 
-    const seventyPercentFontSize = 0.7 * streamProperties.fontSize;
-    const fiftyPercentFontSize = 0.5 * streamProperties.fontSize;
-
-    // New Clear Rect
-    ctx2.fillStyle = "black";
-    ctx2.fillRect(
-      Math.floor(item.XLOC - 0.175 * streamProperties.fontSize),
-      Math.floor(
-        item.YLOC -
-          streamProperties.fontSize * item.streamLength -
-          0.1 * streamProperties.fontSize
-      ),
-      0.9 * streamProperties.fontSize,
-      streamProperties.fontSize
-    );
-
-    /*
-      !! Drawing the fading this way is very detrimental to performance !!
-    */
-    // // Clear up the last shadow layer, to prepare for next stream
-    // ctx2.clearRect(
-    //   item.XLOC,
-    //   Math.floor(item.YLOC - item.streamLength * fontSizeMinus7Percent),
-    //   seventyPercentFontSize,
-    //   streamProperties.fontSize
-    // );
-    // Fading per-stream, on other canvas
-    // if (streamProperties.totalStreams < 5000) {
-    for (let i = 4; i < item.streamLength - 3; i++) {
-      ctx2.fillStyle = "rgba(0, 0, 0, 0.075)";
-      ctx2.fillRect(
-        Math.floor(item.XLOC),
+    const fillRectTweak = (context, xloc, yloc, charPos) => {
+      context.fillRect(
+        Math.floor(xloc - 0.2 * streamProperties.fontSize),
         Math.floor(
-          item.YLOC -
-            streamProperties.fontSize * i -
+          yloc -
+            streamProperties.fontSize * charPos -
             0.1 * streamProperties.fontSize
         ),
-        seventyPercentFontSize,
+        rectTrim,
         streamProperties.fontSize
       );
+    };
+
+    const clearRectTweak = (context, xloc, yloc, charPos) => {
+      context.clearRect(
+        Math.floor(xloc - 0.2 * streamProperties.fontSize),
+        Math.floor(
+          yloc -
+            streamProperties.fontSize * charPos -
+            0.1 * streamProperties.fontSize
+        ),
+        rectTrim,
+        streamProperties.fontSize
+      );
+    };
+
+    const textTweak = (context, character, xloc, yloc, charPos) => {
+      context.fillText(
+        character,
+        Math.floor(xloc),
+        Math.floor(yloc - streamProperties.fontSize * charPos),
+        rectTrim
+      );
+    };
+
+    getRandomChar = () => {
+      const randNum = Math.floor(Math.random() * characters.length);
+      return characters.charAt(randNum);
+    };
+
+    /*
+      Think of the end of the stream being at the top of the code here...
+    */
+
+    // Clean up at the end of the stream
+    ctx2.fillStyle = "black";
+    fillRectTweak(ctx2, item.XLOC, item.YLOC, item.streamLength);
+    ctx.fillStyle = "black";
+    fillRectTweak(ctx, item.XLOC, item.YLOC, item.streamLength);
+
+    // Shading with rgba() is detrimental to performance because
+    // the browser has to calculate the blending on each draw
+    if (streamProperties.shading) {
+      for (let i = 4; i < item.streamLength - 3; i++) {
+        ctx2.fillStyle = "rgba(0, 0, 0, 0.075)";
+        fillRectTweak(ctx2, item.XLOC, item.YLOC, i);
+      }
     }
-    // }
 
     // Chance to flip an already placed character
     if (Math.floor(Math.random() * 3) === 1) {
       let loc = Math.floor(Math.random() * (item.streamLength - 4) + 4);
 
       ctx.fillStyle = "black";
-      ctx.fillRect(
-        Math.floor(item.XLOC - 0.1 * streamProperties.fontSize),
-        Math.floor(
-          item.YLOC -
-            streamProperties.fontSize * loc -
-            0.1 * streamProperties.fontSize
-        ),
-        seventyPercentFontSize,
-        streamProperties.fontSize
-      );
+      fillRectTweak(ctx, item.XLOC, item.YLOC, loc);
 
       ctx.fillStyle = `${streamProperties.settledColor}`;
-      ctx.fillText(
-        characters.charAt(Math.floor(Math.random() * characters.length)),
-        Math.floor(item.XLOC),
-        Math.floor(item.YLOC - streamProperties.fontSize * loc),
-        fiftyPercentFontSize
-      );
+      textTweak(ctx, getRandomChar(), item.XLOC, item.YLOC, loc);
     }
 
     // Third character
     if (item.secondChar) {
       ctx.fillStyle = "black";
-      ctx.fillRect(
-        Math.floor(item.XLOC - (7 / 100) * streamProperties.fontSize),
-        Math.floor(
-          item.YLOC -
-            streamProperties.fontSize * 2 -
-            0.1 * streamProperties.fontSize
-        ),
-        seventyPercentFontSize,
-        streamProperties.fontSize
-      );
+      fillRectTweak(ctx, item.XLOC, item.YLOC, 2);
 
       ctx.fillStyle = `${streamProperties.settledColor}`;
-      ctx.fillText(
-        item.secondChar,
-        Math.floor(item.XLOC),
-        Math.floor(item.YLOC - streamProperties.fontSize * 2),
-        fiftyPercentFontSize
-      );
+      textTweak(ctx, item.secondChar, item.XLOC, item.YLOC, 2);
     }
 
     // Second Character
     if (item.firstChar) {
       // Clear square to clean glow from first char
       ctx.fillStyle = "black";
-      ctx.fillRect(
-        Math.floor(item.XLOC),
-        Math.floor(
-          item.YLOC -
-            streamProperties.fontSize -
-            0.1 * streamProperties.fontSize
-        ),
-        seventyPercentFontSize,
-        streamProperties.fontSize
-      );
+      fillRectTweak(ctx, item.XLOC, item.YLOC, 1);
+
       ctx.fillStyle = `${streamProperties.secondColor}`;
-      ctx.fillText(
-        item.firstChar,
-        Math.floor(item.XLOC),
-        Math.floor(item.YLOC - streamProperties.fontSize),
-        fiftyPercentFontSize
-      );
+      textTweak(ctx, item.firstChar, item.XLOC, item.YLOC, 1);
       item.secondChar = item.firstChar;
     }
 
+    // Paint area for new character black
     ctx.fillStyle = "black";
-    ctx.fillRect(
-      Math.floor(item.XLOC),
-      Math.floor(item.YLOC - 0.1 * streamProperties.fontSize),
-      seventyPercentFontSize,
-      streamProperties.fontSize
-    );
-    // ctx.fillStyle = "black";
-    ctx2.clearRect(
-      Math.floor(item.XLOC - 0.1 * streamProperties.fontSize),
-      Math.floor(item.YLOC - 0.1 * streamProperties.fontSize),
-      seventyPercentFontSize,
-      streamProperties.fontSize
-    );
+    fillRectTweak(ctx, item.XLOC, item.YLOC, 0);
+
+    // Clear the shadow layer at the same spot
+    clearRectTweak(ctx2, item.XLOC, item.YLOC, 0);
 
     // First (new) character
     const randNum = Math.floor(Math.random() * characters.length);
     item.firstChar = characters.charAt(randNum);
     ctx.fillStyle = `${streamProperties.initialColor}`;
-    // ctx.shadowColor = "rgba(230,230,230,1)";
-    // ctx.shadowColor = streamProperties.initialColor;
-    // ctx.shadowBlur = streamProperties.fontSize / 80;
-    ctx.fillText(
-      item.firstChar,
-      Math.floor(item.XLOC),
-      Math.floor(item.YLOC),
-      fiftyPercentFontSize
-    );
-    ctx.shadowColor = null;
-    ctx.shadowBlur = null;
-    // Sets YLOC for next draw interval
+    textTweak(ctx, item.firstChar, item.XLOC, item.YLOC, 0);
+
+    // Set YLOC for next draw interval...
+    // ... or send to top if entire stream off page
     item.YLOC += streamProperties.fontSize;
     if (
       item.YLOC >
       canvas.offsetHeight + streamProperties.fontSize * item.streamLength
     ) {
       item.YLOC = randomYStart();
+      item.XLOC = Math.floor(randomColumn() * 0.9 * streamProperties.fontSize);
       item.firstChar = null;
     }
   });
 };
-// END Stream Generation & Main Draw
+/* END Stream Generation & Update */
 
 // Resize function
+let resizeTimer;
 window.addEventListener("resize", () => {
-  intervalStore.forEach((interval, idx) => {
-    window.clearInterval(interval);
-  });
-  setCanvasSize();
-  genStreamsAndIntervals(
-    streamProperties.maxSpeed,
-    streamProperties.minSpeed,
-    streamProperties.maxIntervals,
-    calculateMaxStreams()
-  );
-  updateReadout();
+  window.clearInterval(resizeTimer);
+  resizeTimer = window.setTimeout(() => {
+    clearAllIntervals();
+    setCanvasSize();
+    genStreamsAndIntervals();
+    updateReadout();
+  }, 750);
 });
 
 // Start drawing
-genStreamsAndIntervals(
-  streamProperties.maxSpeed,
-  streamProperties.minSpeed,
-  streamProperties.maxIntervals,
-  calculateMaxStreams()
-);
+genStreamsAndIntervals();
 
 let discoInterval;
-const discoMode = (stop = false) => {
-  if (stop) {
-    window.clearInterval(discoInterval);
-    return;
-  }
+const discoMode = () => {
   window.clearInterval(discoInterval);
-  const themes = ["matrix", "fire", "ice", "pink", "vanu"];
+
   let currentTheme = 0;
   discoInterval = window.setInterval(() => {
-    setTheme(themes[currentTheme]);
+    changeDiscoColors(
+      themes[currentTheme].color1,
+      themes[currentTheme].color2,
+      themes[currentTheme].color3
+    );
     currentTheme++;
-    if (currentTheme === 5) currentTheme = 0;
+    if (currentTheme === themes.length) currentTheme = 0;
   }, 250);
 };

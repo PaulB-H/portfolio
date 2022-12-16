@@ -1,33 +1,66 @@
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+  color: darkgray;
+}
+
+body {
+  background-color: black;
+  overflow: hidden;
+}
+
+#canvas,
+#canvas2 {
+  display: block;
+  max-width: 100%;
+}
+
 #details {
+  max-height: 100%;
+  overflow-y: auto;
+  padding-top: 20px;
+  max-width: 275px;
   color: white;
   z-index: 100;
   margin: 15px;
-  font-family: sans-serif !important;
-  position: absolute;
-  bottom: 88px;
+  font-family: sans-serif;
+  position: fixed;
+  bottom: 0;
   -webkit-box-shadow: 0px 0px 25px 10px rgba(0, 0, 0, 0.75);
   box-shadow: 0px 0px 25px 10px rgba(0, 0, 0, 0.75);
   background-color: rgba(0, 0, 0, 0.75);
 }
 
-#details > div {
-  margin: 15px;
-}
-
-#debug > p > span {
+#debug * span {
   font-weight: bold;
+  color: lightgray;
+}
+#debug > * {
+  display: block;
+  margin: 5px 0;
 }
 
-#set-font-size {
-  width: 100%;
-  margin-top: 10px;
-}
-
-#profiles {
-  max-width: 250px;
+#profiles div {
   display: flex;
   flex-wrap: wrap;
-  justify-content: center;
+  justify-content: space-around;
+  margin: 10px 0;
+}
+
+#color-selectors {
+  display: flex;
+  justify-content: space-between;
+  margin: 5px 10px;
+}
+.color-input-div {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+.color-input-div > input {
+  margin: 5px 0;
+  border: none;
 }
 
 .big-gray-btn {
@@ -36,9 +69,9 @@
   font-size: 1.1em;
   font-weight: bold;
   color: black;
-  border: none;
   background-color: gray;
   border-radius: 5px;
+  border: none;
 }
 
 .d-none {

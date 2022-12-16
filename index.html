@@ -1,105 +1,299 @@
 <!DOCTYPE html>
 <html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Digital Rain...</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Cutive+Mono&family=IBM+Plex+Mono&display=swap"
+      rel="stylesheet"
+    />
+    <link
+      rel="stylesheet"
+      href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/4.1.1/animate.min.css"
+    />
+    <link rel="stylesheet" href="./digitalrain.css" />
+    <style>
+      * {
+        margin: 0;
+        padding: 0;
+        box-sizing: border-box;
+        color: white;
+      }
 
-<head>
-  <meta charset="UTF-8">
-  <meta http-equiv="X-UA-Compatible" content="IE=edge">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Digital Rain...</title>
-  <link rel="preconnect" href="https://fonts.googleapis.com">
-  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link href="https://fonts.googleapis.com/css2?family=Cutive+Mono&family=IBM+Plex+Mono&display=swap" rel="stylesheet">
-  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/4.1.1/animate.min.css" />
-  <link rel="stylesheet" href="./digitalrain.css">
-  <style>
-    * {
-      margin: 0;
-      padding: 0;
-      box-sizing: border-box;
-      color: white;
-    }
+      body {
+        background-color: black;
+        font-family: "Cutive Mono", monospace;
+      }
 
-    body {
-      background-color: black;
-      font-family: "Cutive Mono", monospace;
-    }
+      #canvas,
+      #canvas2 {
+        z-index: -1;
+        position: absolute;
+        top: 0;
+      }
 
-    #canvas,
-    #canvas2 {
-      z-index: -1;
-      position: absolute;
-      top: 0;
-    }
+      a {
+        font-size: 20px;
+      }
 
-    a {
-      font-size: 20px;
-    }
+      .box-shadow {
+        background-color: rgba(0, 0, 0, 0.75);
+        -webkit-box-shadow: 0px 0px 15px 15px rgba(0, 0, 0, 0.75);
+        box-shadow: 0px 0px 15px 15px rgba(0, 0, 0, 0.75);
+      }
 
-    .box-shadow {
-      background-color: rgba(0, 0, 0, 0.75);
-      -webkit-box-shadow: 0px 0px 15px 15px rgba(0, 0, 0, 0.75);
-      box-shadow: 0px 0px 15px 15px rgba(0, 0, 0, 0.75);
-    }
+      header,
+      main,
+      footer {
+        max-width: 400px;
+        margin: 15px;
+      }
+    </style>
+  </head>
 
-    header,
-    main,
-    footer {
-      max-width: 400px;
-      margin: 15px;
-    }
-  </style>
-</head>
+  <body>
+    <canvas id="canvas"></canvas>
+    <canvas id="canvas2"></canvas>
 
-<body>
-  <canvas id="canvas"></canvas>
-  <canvas id="canvas2"></canvas>
+    <header class="animate__animated animate__fadeIn box-shadow">
+      <h1>Paul Bernard-Hall</h1>
+    </header>
 
-  <header class="animate__animated animate__fadeIn box-shadow">
-    <h1>Paul Bernard-Hall</h1>
-  </header>
-
-  <main>
-    <div id="profile" class="animate__animated animate__fadeIn animate__delay-1s box-shadow"
-      style="--animate-delay: 0.5s;">
-      <p class="animate__animated animate__fadeIn animate__delay-1s box-shadow" style="--animate-delay: 0.75s;">I love
-        building things with JS</p>
-      <br />
-    </div>
-  </main>
-
-  <footer class="animate__animated animate__fadeIn animate__delay-1s box-shadow"
-    style="--animate-delay: 1.25s; position: absolute; bottom: 0">
-    <div id="details">
-      <button id="toggle-details-btn" class="big-gray-btn" onclick="toggleDetailsDiv()">Toggle Details</button>
-      <div id="debug">
-        <p>Total Streams: <span id="active-streams"></span></p>
-        <p>Min Length: <span id="min-length"></span></p>
-        <p>Max Length: <span id="max-length"></span></p>
-        <p>Total Intervals: <span id="num-intervals"></span></p>
-        <p>Max Speed: <span id="max-speed"></span>ms</p>
-        <p>Min Speed: <span id="min-speed"></span>ms</p>
-        <p>Font Size: <span id="font-size"></span>px</p>
-        <label for="set-font-size">Set Font Size</label>
-        <input id="set-font-size" autocomplete="off" type="range" min="10" max="100" value="20"
-          oninput="getFontSizeFromSlider()">
+    <main>
+      <div
+        id="profile"
+        class="animate__animated animate__fadeIn animate__delay-1s box-shadow"
+        style="--animate-delay: 0.5s"
+      >
+        <p
+          class="animate__animated animate__fadeIn animate__delay-1s box-shadow"
+          style="--animate-delay: 0.75s"
+        >
+          I love building things with JS
+        </p>
+        <br />
       </div>
+    </main>
 
-      <div id="profiles">
-        <button id="matrix" class="big-gray-btn" onclick="setTheme('matrix'); discoMode(true)">Matrix</button>
-        <button id="matrix" class="big-gray-btn" onclick="setTheme('fire'); discoMode(true)">Fire</button>
-        <button id="matrix" class="big-gray-btn" onclick="setTheme('ice'); discoMode(true)">Ice</button>
-        <button id="matrix" class="big-gray-btn" onclick="setTheme('pink'); discoMode(true)">Pink</button>
-        <button id="matrix" class="big-gray-btn" onclick="setTheme('vanu'); discoMode(true)">Vanu</button>
-        <button id="disco" class="big-gray-btn" onclick="discoMode()">Disco</button>
+    <footer
+      class="animate__animated animate__fadeIn animate__delay-1s box-shadow"
+      style="--animate-delay: 1.25s; position: absolute; bottom: 0"
+    >
+      <div id="details" style="display: none !important">
+        <button
+          id="toggle-details-btn"
+          class="big-gray-btn"
+          onclick="toggleDetailsDiv()"
+        >
+          Toggle Details
+        </button>
+
+        <div id="debug">
+          <p>Total Streams: <span id="active-streams"></span></p>
+          <label for="adjust-total-streams">
+            Total adjusted by: <span id="adjust-total"></span>%
+          </label>
+          <input
+            id="adjust-total-streams"
+            name="adjust-total-streams"
+            autocomplete="off"
+            type="range"
+            min="0.025"
+            max="0.175"
+            step="0.001"
+            value="0.1"
+          />
+          <p>25% &nbsp;&nbsp;&nbsp; 100% &nbsp;&nbsp;&nbsp; 175%</p>
+          <label for="set-min-length">
+            Min Length: <span id="min-length"></span>
+          </label>
+          <input
+            id="set-min-length"
+            name="set-min-length"
+            autocomplete="off"
+            type="range"
+            min="5"
+            max="100"
+            value="5"
+          />
+          <label for="set-max-length">
+            Max Length: <span id="max-length"></span>
+          </label>
+          <input
+            id="set-max-length"
+            name="set-max-length"
+            autocomplete="off"
+            type="range"
+            min="5"
+            max="100"
+            value="20"
+          />
+          <p>Total Intervals: <span id="num-intervals"></span></p>
+          <label for="set-fastest-interval">
+            Fastest Interval: <span id="fastest-interval"></span>ms
+          </label>
+          <input
+            id="set-fastest-interval"
+            name="set-fastest-interval"
+            autocomplete="off"
+            type="range"
+            min="10"
+            max="1000"
+            value="50"
+          />
+          <label for="set-slowest-interval">
+            Slowest Interval: <span id="slowest-interval"></span>ms
+          </label>
+          <input
+            id="set-slowest-interval"
+            name="set-slowest-interval"
+            autocomplete="off"
+            type="range"
+            min="10"
+            max="1000"
+            value="500"
+          />
+          <label for="set-font-size">
+            Font Size: <span id="font-size"></span>px
+          </label>
+          <input
+            id="set-font-size"
+            name="set-font-size"
+            autocomplete="off"
+            type="range"
+            min="5"
+            max="100"
+            value="20"
+            oninput="getFontSizeFromSlider()"
+          />
+        </div>
+
+        <div id="change-stream-properties">
+          <div style="display: flex; align-items: center; margin: 10px">
+            <label
+              style="font-weight: bold; margin-right: 15px; font-size: 20px"
+              for="bold-checkbox"
+              >Bold</label
+            >
+            <input
+              style="width: 25px; height: 25px"
+              type="checkbox"
+              id="bold-checkbox"
+              name="bold"
+              checked
+              autocomplete="off"
+            />
+
+            <label
+              style="font-weight: bold; margin: 0 15px; font-size: 20px"
+              for="shading-checkbox"
+              >Shading</label
+            >
+            <input
+              style="width: 25px; height: 25px"
+              type="checkbox"
+              id="shading-checkbox"
+              name="shading"
+              checked
+              autocomplete="off"
+            />
+          </div>
+
+          <p style="text-align: center; margin-bottom: 5px; font-size: 20px">
+            &darr; Tap to set a color &darr;
+          </p>
+          <div id="color-selectors">
+            <div class="color-input-div">
+              <label for="color1">Color 1</label>
+              <input
+                type="color"
+                name="color1"
+                id="color1"
+                autocomplete="off"
+                value="#ff0000"
+                onchange="changeStreamColors(this.value, null, null)"
+              />
+            </div>
+
+            <div class="color-input-div">
+              <label for="color2">Color 2</label>
+              <input
+                type="color"
+                name="color2"
+                id="color2"
+                autocomplete="off"
+                value="#ffff00"
+                onchange="changeStreamColors(null, this.value, null)"
+              />
+            </div>
+
+            <div class="color-input-div">
+              <label for="color3">Color 3</label>
+              <input
+                type="color"
+                name="color3"
+                id="color3"
+                autocomplete="off"
+                value="#0000ff"
+                onchange="changeStreamColors(null, null, this.value)"
+              />
+            </div>
+          </div>
+          <!-- END #color-selectors -->
+          <button
+            id="use-these-colors"
+            onclick="useTheseColors()"
+            style="width: 95%"
+            class="big-gray-btn"
+          >
+            ^ Use Selected Colors ^
+          </button>
+        </div>
+        <!-- END #change-stream-properties -->
+
+        <div id="profiles">
+          <p
+            style="text-align: center; font-size: 20px; margin: 10px 0 -10px 0"
+          >
+            Or Pick a Theme:
+          </p>
+          <div>
+            <button class="big-gray-btn" onclick="setTheme('matrix')">
+              Matrix
+            </button>
+            <button class="big-gray-btn" onclick="setTheme('fire')">
+              Fire
+            </button>
+            <button class="big-gray-btn" onclick="setTheme('ice')">Ice</button>
+            <button class="big-gray-btn" onclick="setTheme('pink')">
+              Pink
+            </button>
+            <button class="big-gray-btn" onclick="setTheme('vanu')">
+              Vanu
+            </button>
+            <button class="big-gray-btn" onclick="discoMode()">Disco</button>
+          </div>
+        </div>
       </div>
-    </div>
-    <p style="margin-bottom: 10px;"><a target="_blank" href="https://github.com/paulb-h">github.com/paulb-h</a></p>
-    <p style="margin-bottom: 10px;"><a target="_blank"
-        href="https://www.linkedin.com/in/paulb-h/">linkedin.com/in/paulb-h</a></p>
-    <a target="_blank" href="https://github.com/paulb-h/digitalrain">githib.com/paulb-h/digitalrain</a>
-  </footer>
+      <p style="margin-bottom: 10px">
+        <a target="_blank" href="https://github.com/paulb-h"
+          >github.com/paulb-h</a
+        >
+      </p>
+      <p style="margin-bottom: 10px">
+        <a target="_blank" href="https://www.linkedin.com/in/paulb-h/"
+          >linkedin.com/in/paulb-h</a
+        >
+      </p>
+      <a target="_blank" href="https://github.com/paulb-h/digitalrain"
+        >githib.com/paulb-h/digitalrain</a
+      >
+    </footer>
 
-  <script src="./digitalrain.js"></script>
-</body>
-
+    <script src="./digitalrain.js"></script>
+  </body>
 </html>
