@@ -93,6 +93,28 @@
         </button>
 
         <div id="debug">
+          <p style="font-weight: bold">Animation Mode:</p>
+          <div class="animation-mode-div">
+            <input
+              type="radio"
+              id="use-reqAnimFrame-radio"
+              name="set-animation-mode"
+              value="requestAnimationFrame"
+              checked
+              autocomplete="off"
+            />
+            <label for="use-reqAnimFrame-radio">requestAnimationFrame()</label>
+          </div>
+          <div id="animation-mode-div">
+            <input
+              type="radio"
+              id="use-intervals-radio"
+              name="set-animation-mode"
+              value="intervals"
+              autocomplete="off"
+            />
+            <label for="use-intervals-radio">Intervals</label>
+          </div>
           <p>Total Streams: <span id="active-streams"></span></p>
           <label for="adjust-total-streams">
             Total adjusted by: <span id="adjust-total"></span>%
