@@ -7,163 +7,9 @@ const ctx2 = canvas2.getContext("2d");
 const characters =
   "MATRIXMATRIXMATRIXMATRIXMAØ1Ø1Ø1Ø1Ø#$%@&#$%@&ｦｧｨｩｪｫｬｭｮｯｱｲｳｴｵｶｷｸｹｺｻｼｽｾｿﾀﾁﾂﾃﾄﾅﾇﾈﾉﾊﾋﾌﾍﾎﾏﾐﾑﾒﾓﾔﾕﾖﾗﾘﾙﾚﾛﾜﾝｦｧｨｩｪｫｬｭｮｯｱｲｳｴｵｶｷｸｹｺｻｼｽｾｿﾀﾁﾂﾃﾄﾅﾇﾈﾉﾊﾋﾌﾍﾎﾏﾐﾑﾒﾓﾔﾕﾖﾗﾘﾙﾚﾛﾜﾝｦｧｨｩｪｫｬｭｮｯｱｲｳｴｵｶｷｸｹｺｻｼｽｾｿﾀﾁﾂﾃﾄﾅﾇﾈﾉﾊﾋﾌﾍﾎﾏﾐﾑﾒﾓﾔﾕﾖﾗﾘﾙﾚﾛﾜﾝｦｧｨｩｪｫｬｭｮｯｱｲｳｴｵｶｷｸｹｺｻｼｽｾｿﾀﾁﾂﾃﾄﾅﾇﾈﾉﾊﾋﾌﾍﾎﾏﾐﾑﾒﾓﾔﾕﾖﾗﾘﾙﾚﾛﾜﾝ";
 
-// Spans to update with stream info...
-const mainDetailsDiv = document.getElementById("details");
-const useReqAnimFrameRadio = document.getElementById("use-reqAnimFrame-radio");
-const useIntervalsRadio = document.getElementById("use-intervals-radio");
-const activeStreamsSpan = document.getElementById("active-streams");
-const adjustTotalStreamSpan = document.getElementById("adjust-total");
-const adjustTotalStreamSlider = document.getElementById("adjust-total-streams");
-const streamMinLengthSpan = document.getElementById("min-length");
-const streamMaxLengthSpan = document.getElementById("max-length");
-const setMinLenSlider = document.getElementById("set-min-length");
-const setMaxLenSlider = document.getElementById("set-max-length");
-const numOfIntervalsSpan = document.getElementById("num-intervals");
-const fastestIntervalSpan = document.getElementById("fastest-interval");
-const slowestIntervalSpan = document.getElementById("slowest-interval");
-const setFastestSlider = document.getElementById("set-fastest-interval");
-const setSlowestSlider = document.getElementById("set-slowest-interval");
-const streamFontSizeSpan = document.getElementById("font-size");
-const setFontSizeSlider = document.getElementById("set-font-size");
-const toggleDetailsButton = document.getElementById("toggle-details-btn");
-const toggleBoldCheckbox = document.getElementById("bold-checkbox");
-const toggleShadingCheckbox = document.getElementById("shading-checkbox");
-// ... and a function update them
-const updateReadout = () => {
-  // activeStreamsSpan.innerText = streamProperties.maxStreams;
-  streamMaxLengthSpan.innerText = streamProperties.maxLength;
-  streamMinLengthSpan.innerText = streamProperties.minLength;
-  numOfIntervalsSpan.innerText = streamProperties.maxIntervals;
-  streamFontSizeSpan.innerText = streamProperties.fontSize;
-  fastestIntervalSpan.innerText = streamProperties.fastestInterval;
-  slowestIntervalSpan.innerText = streamProperties.slowestInterval;
-  adjustTotalStreamSpan.innerText = parseInt(
-    streamProperties.maxStreamAdjustment * 100
-  );
-};
-const toggleDetailsDiv = () => {
-  const allDetails = document.querySelectorAll("#details div");
-  allDetails.forEach((element, idx) => {
-    element.classList.toggle("d-none");
-  });
-  toggleDetailsButton.classList.toggle("fade-button");
-};
-
-[useReqAnimFrameRadio, useIntervalsRadio].forEach((radioInput) => {
-  radioInput.addEventListener("change", (e) => {
-    clearAllIntervals();
-    setCanvasSize();
-    streamProperties.animationMode = e.target.value;
-    startAnimation();
-  });
-});
-
-let adjustTotalStreamTimeout;
-adjustTotalStreamSlider.addEventListener("input", (e) => {
-  adjustTotalStreamSpan.innerText = parseInt(e.target.value * 100);
-  window.clearTimeout(adjustTotalStreamTimeout);
-  adjustTotalStreamTimeout = window.setTimeout(() => {
-    clearAllIntervals();
-    setCanvasSize();
-    streamProperties.maxStreamAdjustment = e.target.value;
-    startAnimation();
-    updateReadout();
-  }, 750);
-});
-
-let setMinLenTimeout;
-setMinLenSlider.addEventListener("input", (e) => {
-  window.clearTimeout(setMinLenTimeout);
-  if (parseInt(e.target.value) > parseInt(setMaxLenSlider.value))
-    e.target.value = setMaxLenSlider.value;
-  streamMinLengthSpan.innerText = e.target.value;
-  setMinLenTimeout = window.setTimeout(() => {
-    clearAllIntervals();
-    setCanvasSize();
-    streamProperties.minLength = parseInt(e.target.value);
-    startAnimation();
-  }, 750);
-});
-let setMaxLenTimeout;
-setMaxLenSlider.addEventListener("input", (e) => {
-  window.clearTimeout(setMaxLenTimeout);
-  if (parseInt(e.target.value) < parseInt(setMinLenSlider.value))
-    e.target.value = setMinLenSlider.value;
-  streamMaxLengthSpan.innerText = e.target.value;
-  setMaxLenTimeout = window.setTimeout(() => {
-    clearAllIntervals();
-    setCanvasSize();
-    streamProperties.maxLength = parseInt(e.target.value);
-    startAnimation();
-  }, 750);
-});
-
-let setFastestTimeout;
-setFastestSlider.addEventListener("input", (e) => {
-  window.clearTimeout(setFastestTimeout);
-  if (parseInt(e.target.value) > parseInt(setSlowestSlider.value))
-    e.target.value = setSlowestSlider.value;
-  fastestIntervalSpan.innerText = e.target.value;
-  setFastestTimeout = window.setTimeout(() => {
-    setStreamSpeed(null, parseInt(e.target.value));
-  }, 750);
-});
-let setSlowestTimeout;
-setSlowestSlider.addEventListener("input", (e) => {
-  window.clearTimeout(setSlowestTimeout);
-  if (parseInt(e.target.value) < parseInt(setFastestSlider.value))
-    e.target.value = setFastestSlider.value;
-  slowestIntervalSpan.innerText = e.target.value;
-  setSlowestTimeout = window.setTimeout(() => {
-    setStreamSpeed(parseInt(e.target.value), null);
-  }, 750);
-});
-
-let getFontTimeout;
-const getFontSizeFromSlider = () => {
-  streamFontSizeSpan.innerText = setFontSizeSlider.value;
-  window.clearInterval(getFontTimeout);
-  getFontTimeout = window.setTimeout(() => {
-    setFontSize(parseInt(setFontSizeSlider.value));
-  }, 1500);
-};
-
-toggleBoldCheckbox.addEventListener("change", (e) => {
-  if (e.target.checked) streamProperties.bold = true;
-  else streamProperties.bold = false;
-  clearAllIntervals();
-  setCanvasSize();
-  startAnimation();
-});
-toggleShadingCheckbox.addEventListener("change", (e) => {
-  if (e.target.checked) streamProperties.shading = true;
-  else streamProperties.shading = false;
-});
-
-// Canvas sizing
-const setCanvasSize = () => {
-  canvas.width = document.querySelector("body").offsetWidth;
-  canvas2.width = document.querySelector("body").offsetWidth;
-
-  if (window.innerHeight > document.querySelector("body").offsetHeight) {
-    canvas.height = window.innerHeight;
-    canvas2.height = window.innerHeight;
-  } else {
-    canvas.height = document.querySelector("body").offsetHeight;
-    canvas2.height = document.querySelector("body").offsetHeight;
-  }
-
-  ctx.translate(canvas.width, 0);
-  ctx.scale(-1, 1);
-  ctx2.translate(canvas2.width, 0);
-  ctx2.scale(-1, 1);
-
-  ctx.fillStyle = "black";
-  ctx.fillRect(0, 0, canvas.width, canvas.height);
-};
-setCanvasSize();
-
-// streamProperties & functions
+/**/
+//// Main object to control stream properties
+/**/
 const streamProperties = {
   animationMode: "requestAnimationFrame",
 
@@ -187,24 +33,192 @@ const streamProperties = {
   shading: true,
 };
 
-const changeDiscoColors = (color1, color2, color3) => {
-  if (color1) streamProperties.initialColor = color1;
-  if (color2) streamProperties.secondColor = color2;
-  if (color3) streamProperties.settledColor = color3;
-};
+/**/
+//// UI Elements
+/**/
 
-const changeStreamColors = (color1, color2, color3) => {
-  window.clearInterval(discoInterval);
-  if (color1) streamProperties.initialColor = color1;
-  if (color2) streamProperties.secondColor = color2;
-  if (color3) streamProperties.settledColor = color3;
+const headless = true;
+
+// prettier-ignore
+if (!headless) {
+  // const mainDetailsDiv = document.getElementById("details");
+
+  const toggleDetailsButton = document.getElementById("toggle-details-btn");
+  toggleDetailsButton.addEventListener("click", () => {
+    const allDetails = document.querySelectorAll("#details div");
+    allDetails.forEach((element) => {
+      element.classList.toggle("d-none");
+    });
+    toggleDetailsButton.classList.toggle("fade-button");
+  });
+
+  const useReqAnimFrameRadio = document.getElementById("use-reqAnimFrame-radio");
+  const useIntervalsRadio = document.getElementById("use-intervals-radio");
+  [useReqAnimFrameRadio, useIntervalsRadio].forEach((radioInput) => {
+    radioInput.addEventListener("change", (e) => {
+      clearAllIntervals();
+      setCanvasSize();
+      streamProperties.animationMode = e.target.value;
+      startAnimation();
+    });
+  });
+
+  const activeStreamsSpan = document.getElementById("active-streams");
+
+  const adjustTotalStreamSpan = document.getElementById("adjust-total");
+  const adjustTotalStreamSlider = document.getElementById("adjust-total-streams");
+  let adjustTotalStreamTimeout;
+  adjustTotalStreamSlider.addEventListener("input", (e) => {
+    adjustTotalStreamSpan.innerText = parseInt(e.target.value * 100);
+    window.clearTimeout(adjustTotalStreamTimeout);
+    adjustTotalStreamTimeout = window.setTimeout(() => {
+      clearAllIntervals();
+      setCanvasSize();
+      streamProperties.maxStreamAdjustment = parseFloat(e.target.value);
+      startAnimation();
+    }, 750);
+  });
+
+  const streamMinLengthSpan = document.getElementById("min-length");
+  const setMinLenSlider = document.getElementById("set-min-length");
+  const streamMaxLengthSpan = document.getElementById("max-length");
+  const setMaxLenSlider = document.getElementById("set-max-length");
+  let setMinLenTimeout;
+  setMinLenSlider.addEventListener("input", (e) => {
+    window.clearTimeout(setMinLenTimeout);
+    if (parseInt(e.target.value) > parseInt(setMaxLenSlider.value))
+      e.target.value = setMaxLenSlider.value;
+    streamMinLengthSpan.innerText = e.target.value;
+    setMinLenTimeout = window.setTimeout(() => {
+      streamProperties.minLength = parseInt(e.target.value);
+      setStreamLength(streamProperties.minLength)
+    }, 750);
+  });
+  let setMaxLenTimeout;
+  setMaxLenSlider.addEventListener("input", (e) => {
+    window.clearTimeout(setMaxLenTimeout);
+    if (parseInt(e.target.value) < parseInt(setMinLenSlider.value))
+      e.target.value = setMinLenSlider.value;
+    streamMaxLengthSpan.innerText = e.target.value;
+    setMaxLenTimeout = window.setTimeout(() => {
+      streamProperties.minLength = parseInt(e.target.value);
+      setStreamLength(null, streamProperties.minLength)
+    }, 750);
+  });
+
+  // const numOfIntervalsSpan = document.getElementById("num-intervals");
+
+  const fastestIntervalSpan = document.getElementById("fastest-interval");
+  const setFastestSlider = document.getElementById("set-fastest-interval");
+  const slowestIntervalSpan = document.getElementById("slowest-interval");
+  const setSlowestSlider = document.getElementById("set-slowest-interval");
+  let setFastestTimeout;
+  setFastestSlider.addEventListener("input", (e) => {
+    window.clearTimeout(setFastestTimeout);
+    if (parseInt(e.target.value) > parseInt(setSlowestSlider.value))
+      e.target.value = setSlowestSlider.value;
+    fastestIntervalSpan.innerText = e.target.value;
+    setFastestTimeout = window.setTimeout(() => {
+      setStreamSpeed(null, parseInt(e.target.value));
+    }, 750);
+  });
+  let setSlowestTimeout;
+  setSlowestSlider.addEventListener("input", (e) => {
+    window.clearTimeout(setSlowestTimeout);
+    if (parseInt(e.target.value) < parseInt(setFastestSlider.value))
+      e.target.value = setFastestSlider.value;
+    slowestIntervalSpan.innerText = e.target.value;
+    setSlowestTimeout = window.setTimeout(() => {
+      setStreamSpeed(parseInt(e.target.value), null);
+    }, 750);
+  });
+
+  const streamFontSizeSpan = document.getElementById("font-size");
+  const setFontSizeSlider = document.getElementById("set-font-size");
+  let getFontTimeout;
+  setFontSizeSlider.addEventListener("input", (e) => {
+    streamFontSizeSpan.innerText = setFontSizeSlider.value;
+    window.clearInterval(getFontTimeout);
+    getFontTimeout = window.setTimeout(() => {
+      setFontSize(parseInt(setFontSizeSlider.value));
+    }, 1500);
+  });
+
+  const toggleBoldCheckbox = document.getElementById("bold-checkbox");
+  const toggleShadingCheckbox = document.getElementById("shading-checkbox");
+  toggleBoldCheckbox.addEventListener("change", (e) => {
+    if (e.target.checked) streamProperties.bold = true;
+    else streamProperties.bold = false;
+    clearAllIntervals();
+    setCanvasSize();
+    startAnimation();
+  });
+  toggleShadingCheckbox.addEventListener("change", (e) => {
+    if (e.target.checked) streamProperties.shading = true;
+    else streamProperties.shading = false;
+  });
+
+  const useTheseColorsBtn = document.getElementById("use-these-colors");
+  useTheseColorsBtn.addEventListener("click", () => {
+    const color1 = document.getElementById("color1").value;
+    const color2 = document.getElementById("color2").value;
+    const color3 = document.getElementById("color3").value;
+    changeStreamColors(color1, color2, color3);
+  });
+
+  const updateReadout = () => {
+    activeStreamsSpan.innerText = streamProperties.maxStreams;
+    streamMaxLengthSpan.innerText = streamProperties.maxLength;
+    streamMinLengthSpan.innerText = streamProperties.minLength;
+    // numOfIntervalsSpan.innerText = streamProperties.maxIntervals;
+    streamFontSizeSpan.innerText = streamProperties.fontSize;
+    fastestIntervalSpan.innerText = streamProperties.fastestInterval;
+    slowestIntervalSpan.innerText = streamProperties.slowestInterval;
+    adjustTotalStreamSpan.innerText = parseInt(
+      streamProperties.maxStreamAdjustment * 100
+    );
+  };
+  updateReadout();
+
+  window.setInterval(() => {
+    activeStreamsSpan.innerText = streamProperties.maxStreams;
+  }, 500);
+}
+
+// Canvas sizing
+const setCanvasSize = () => {
+  canvas.width = document.querySelector("body").offsetWidth;
+  canvas2.width = document.querySelector("body").offsetWidth;
+
+  if (window.innerHeight > document.querySelector("body").offsetHeight) {
+    canvas.height = window.innerHeight;
+    canvas2.height = window.innerHeight;
+  } else {
+    canvas.height = document.querySelector("body").offsetHeight;
+    canvas2.height = document.querySelector("body").offsetHeight;
+  }
+
+  ctx.translate(canvas.width, 0);
+  ctx.scale(-1, 1);
+  ctx2.translate(canvas2.width, 0);
+  ctx2.scale(-1, 1);
+
+  ctx.fillStyle = "black";
+  ctx.fillRect(0, 0, canvas.width, canvas.height);
 };
-const useTheseColors = () => {
-  const color1 = document.getElementById("color1").value;
-  const color2 = document.getElementById("color2").value;
-  const color3 = document.getElementById("color3").value;
-  changeStreamColors(color1, color2, color3);
-};
+let resizeTimer;
+window.addEventListener("resize", () => {
+  window.clearInterval(resizeTimer);
+  resizeTimer = window.setTimeout(() => {
+    clearAllIntervals();
+    setCanvasSize();
+    startAnimation();
+  }, 750);
+});
+
+/**/
+//// Font Properties
+/**/
 const themes = [
   {
     name: "matrix",
@@ -245,6 +259,13 @@ const setTheme = (themeName) => {
   });
 };
 
+const changeStreamColors = (color1, color2, color3) => {
+  window.clearInterval(discoInterval);
+  if (color1) streamProperties.initialColor = color1;
+  if (color2) streamProperties.secondColor = color2;
+  if (color3) streamProperties.settledColor = color3;
+};
+
 const setFontSize = (fontSize) => {
   clearAllIntervals();
 
@@ -261,13 +282,19 @@ const setFontSize = (fontSize) => {
   startAnimation();
 };
 
+/**/
+//// Stream Properties
+/**/
+
+// Column width adjustment
+const columnWidthTweak = 0.85;
+
 const setStreamLength = (min = null, max = null) => {
   clearAllIntervals();
   if (min) streamProperties.minLength = min;
   if (max) streamProperties.maxLength = max;
   setCanvasSize();
   startAnimation();
-  updateReadout();
 };
 
 const setStreamSpeed = (slowestInterval = null, fastestInterval = null) => {
@@ -279,14 +306,8 @@ const setStreamSpeed = (slowestInterval = null, fastestInterval = null) => {
   if (fastestInterval) streamProperties.fastestInterval = fastestInterval;
   setCanvasSize();
   startAnimation();
-  updateReadout();
 };
-/* END streamProperties & functions */
 
-// Affects column width
-const columnWidthTweak = 0.85;
-
-// Stream Generation & Update
 const getTotalColumns = () => {
   return Math.floor(
     window.innerWidth / (columnWidthTweak * streamProperties.fontSize) +
@@ -332,24 +353,19 @@ const calculateMaxStreams = () => {
   );
 
   streamProperties.maxStreams = totalStreams;
-  activeStreamsSpan.innerText = totalStreams;
+
   return totalStreams;
 };
 
-/* Clears requestAnimationFrame and interval version now... */
-const clearAllIntervals = () => {
-  streamIntervalStore.forEach((interval, idx) => {
-    window.clearInterval(interval);
-  });
-  streamIntervalStore = [];
-  window.clearInterval(generatingInterval);
-  arrayOfStreamSets = [];
-
-  window.clearInterval(newGeneratingInterval);
-  controllerArr.forEach((controller) => {
-    window.cancelAnimationFrame(controller.frameRef);
-  });
-  controllerArr = [];
+const genInterval = () => {
+  return (
+    Math.floor(
+      Math.random() *
+        (streamProperties.slowestInterval -
+          streamProperties.fastestInterval +
+          1)
+    ) + streamProperties.fastestInterval
+  );
 };
 
 class Stream {
@@ -359,20 +375,6 @@ class Stream {
     this.streamLength = randomStreamLength();
     this.firstChar = null;
     this.secondChar = null;
-    this.interval = genInterval();
-    this.lastUpdate = null;
-    this.frameRef = null;
-    this.animateMe = this.animateMe.bind(this);
-  }
-
-  animateMe(timestamp) {
-    if (!this.lastUpdate) this.lastUpdate = timestamp;
-    if (timestamp - this.lastUpdate >= this.interval) {
-      updateAnStream(this);
-      this.lastUpdate = timestamp;
-    }
-
-    this.frameRef = window.requestAnimationFrame(this.animateMe);
   }
 
   reset() {
@@ -381,60 +383,11 @@ class Stream {
     this.streamLength = randomStreamLength();
     this.firstChar = null;
     this.secondChar = null;
-    this.interval = genInterval();
   }
 }
 
-// Each set item contains multiple different stream objects
-let arrayOfStreamSets = [];
-const fillStreams = () => {
-  const numOfStreams = calculateMaxStreams();
-
-  for (let i = 0; i < streamProperties.maxIntervals; i++) {
-    arrayOfStreamSets.push(new Set());
-  }
-
-  for (let i = 0; i < numOfStreams; i++) {
-    const randomSet = Math.floor(Math.random() * arrayOfStreamSets.length);
-
-    const newStream = new Stream();
-
-    arrayOfStreamSets[randomSet].add(newStream);
-  }
-};
-
-// Each set of stream items is assigned to a random interval
-// which triggers the draw update for the streams in that set
-let streamIntervalStore = [];
-let generatingInterval;
-const startGeneratingInterval = () => {
-  generatingInterval = window.setInterval(() => {
-    const length = streamIntervalStore.length;
-
-    if (streamIntervalStore.length >= 100) {
-      window.clearInterval(generatingInterval);
-      return;
-    } else if (arrayOfStreamSets[length].size === 0) {
-      // If there are no items in the set we don't give it an interval...
-      streamIntervalStore.push(null);
-    } else {
-      const min = streamProperties.fastestInterval;
-      const max = streamProperties.slowestInterval;
-      const randSpeed = Math.floor(Math.random() * (max - min + 1)) + min;
-      let newInterval = window.setInterval(() => {
-        updateStreams(arrayOfStreamSets[length]);
-      }, randSpeed);
-      streamIntervalStore.push(newInterval);
-    }
-  }, 150);
-};
-
-const genStreamsAndIntervals = () => {
-  fillStreams();
-  startGeneratingInterval();
-  updateReadout();
-};
-
+/* Both interval mode and requestAnimationFrame modes use updateStreams */
+/* to update positions & draw characters for each stream */
 const updateStreams = (setOfStreams) => {
   setOfStreams.forEach((stream, idx) => {
     ctx.font = `${streamProperties.fontSize}px "Cutive Mono", monospace`;
@@ -565,49 +518,81 @@ const updateStreams = (setOfStreams) => {
     }
   });
 };
-/* END Stream Generation & Update */
 
-// Resize function
-let resizeTimer;
-window.addEventListener("resize", () => {
-  window.clearInterval(resizeTimer);
-  resizeTimer = window.setTimeout(() => {
-    clearAllIntervals();
-    setCanvasSize();
-    startAnimation();
-    updateReadout();
-  }, 750);
-});
+/* Stops any intervals and/or requestAnimationFrame() requests */
+/* Does not clear canvas */
+const clearAllIntervals = () => {
+  streamIntervalStore.forEach((interval, idx) => {
+    window.clearInterval(interval);
+  });
+  streamIntervalStore = [];
+  window.clearInterval(generatingInterval);
+  arrayOfStreamSets = [];
 
-// Start drawing (interval version)
-// genStreamsAndIntervals();
-
-let discoInterval;
-const discoMode = () => {
-  window.clearInterval(discoInterval);
-
-  let currentTheme = 0;
-  discoInterval = window.setInterval(() => {
-    changeDiscoColors(
-      themes[currentTheme].color1,
-      themes[currentTheme].color2,
-      themes[currentTheme].color3
-    );
-    currentTheme++;
-    if (currentTheme === themes.length) currentTheme = 0;
-  }, 250);
+  window.clearInterval(newGeneratingInterval);
+  controllerArr.forEach((controller) => {
+    window.cancelAnimationFrame(controller.frameRef);
+  });
+  controllerArr = [];
 };
 
-const genInterval = () => {
-  return (
-    Math.floor(
-      Math.random() *
-        (streamProperties.slowestInterval -
-          streamProperties.fastestInterval +
-          1)
-    ) + streamProperties.fastestInterval
-  );
+/**/
+////  "intervals" animation mode
+/**/
+
+let arrayOfStreamSets = [];
+const fillStreams = () => {
+  const numOfStreams = calculateMaxStreams();
+
+  for (let i = 0; i < streamProperties.maxIntervals; i++) {
+    arrayOfStreamSets.push(new Set());
+  }
+
+  for (let i = 0; i < numOfStreams; i++) {
+    const randomSet = Math.floor(Math.random() * arrayOfStreamSets.length);
+
+    const newStream = new Stream();
+
+    arrayOfStreamSets[randomSet].add(newStream);
+  }
 };
+
+let streamIntervalStore = [];
+let generatingInterval;
+const startGeneratingInterval = () => {
+  generatingInterval = window.setInterval(() => {
+    const length = streamIntervalStore.length;
+
+    if (streamIntervalStore.length >= 100) {
+      window.clearInterval(generatingInterval);
+      return;
+    } else if (arrayOfStreamSets[length].size === 0) {
+      // If there are no items in the set we don't give it an interval...
+      streamIntervalStore.push(null);
+    } else {
+      const min = streamProperties.fastestInterval;
+      const max = streamProperties.slowestInterval;
+      const randSpeed = Math.floor(Math.random() * (max - min + 1)) + min;
+      let newInterval = window.setInterval(() => {
+        updateStreams(arrayOfStreamSets[length]);
+      }, randSpeed);
+      streamIntervalStore.push(newInterval);
+    }
+  }, 150);
+};
+
+const genStreamsAndIntervals = () => {
+  fillStreams();
+  startGeneratingInterval();
+};
+
+/**/
+////  end "intervals" animation mode
+/**/
+
+/**/
+////  "requestAnimationFrame" animation mode
+/**/
 
 class StreamController {
   constructor() {
@@ -630,7 +615,6 @@ class StreamController {
 }
 
 let controllerArr = [];
-
 let newGeneratingInterval;
 const generateAndRun = () => {
   for (let i = 0; i < 100; i++) {
@@ -649,17 +633,41 @@ const generateAndRun = () => {
     if (controllerArr[i].streams.size > 0) controllerArr[i].animateMe();
     i++;
     if (i === controllerArr.length) window.clearInterval(newGeneratingInterval);
-  }, 100);
-
-  updateReadout();
+  }, 250);
 };
 
-// Start drawing (requestAnimationFrame version)
-generateAndRun();
+/**/
+////  end "requestAnimationFrame" animation mode
+/**/
 
+// Start drawing - Depends on streamProperties.animationMode
 const startAnimation = () => {
+  setCanvasSize();
   if (streamProperties.animationMode === "requestAnimationFrame")
     generateAndRun();
   else if (streamProperties.animationMode === "intervals")
     genStreamsAndIntervals();
+};
+startAnimation();
+
+// Disco Mode
+const changeDiscoColors = (color1, color2, color3) => {
+  if (color1) streamProperties.initialColor = color1;
+  if (color2) streamProperties.secondColor = color2;
+  if (color3) streamProperties.settledColor = color3;
+};
+let discoInterval;
+const discoMode = () => {
+  window.clearInterval(discoInterval);
+
+  let currentTheme = 0;
+  discoInterval = window.setInterval(() => {
+    changeDiscoColors(
+      themes[currentTheme].color1,
+      themes[currentTheme].color2,
+      themes[currentTheme].color3
+    );
+    currentTheme++;
+    if (currentTheme === themes.length) currentTheme = 0;
+  }, 250);
 };
